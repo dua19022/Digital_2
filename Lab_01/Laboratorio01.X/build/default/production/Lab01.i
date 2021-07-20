@@ -2744,15 +2744,26 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 # 33 "Lab01.c" 2
 
+# 1 "./Lib01.h" 1
+# 11 "./Lib01.h"
+#pragma config FOSC = INTRC_NOCLKOUT
+
+
+
+void ADC_conf(char frec);
 
 
 
 
-char tabla[16] = {0b00111111, 0b00000110, 0b01011011,
-                       0b01001111, 0b01100110, 0b01101101,
-                       0b01111101, 0b00000111, 0b01111111,
-                       0b01101111, 0b01110111, 0b01111100,
-                       0b00111001, 0b01011110, 0b01111001, 0b01110001};
+char translate_hex(char var);
+# 34 "Lab01.c" 2
+
+
+
+
+char tabla[16] = {0b00111111, 0b00000110, 0b01011011, 0b01001111, 0b01100110,
+    0b01101101, 0b01111101, 0b00000111, 0b01111111, 0b01101111, 0b01110111,
+    0b01111100, 0b00111001, 0b01011110, 0b01111001, 0b01110001};
 int multi;
 int ADC;
 int flag;
@@ -2785,7 +2796,7 @@ void __attribute__((picinterrupt(("")))) isr(void)
     {
         RA5 = 0;
         RA6 = 0;
-        if (flag == 1){
+       if (flag == 1){
             PORTAbits.RA5 = 1;
 
             PORTD = tabla[nib_up];
@@ -2891,23 +2902,13 @@ void setup(void){
     INTCONbits.T0IF = 0;
     PIE1bits.ADIE = 1;
     PIR1bits.ADIF = 0;
-
-
-    ADCON0bits.ADCS0 = 0;
-    ADCON0bits.ADCS1 = 1;
-    ADCON0bits.ADON = 1;
-    ADCON0bits.CHS = 0;
-    _delay((unsigned long)((50)*(250000/4000000.0)));
-
-    ADCON1bits.ADFM = 0;
-    ADCON1bits.VCFG0 = 0;
-    ADCON1bits.VCFG1 = 0;
-
+# 190 "Lab01.c"
+    ADC_conf(2);
 }
 
 char nibbles_setup (char display){
-    nib_do = display&0x0F;
-    nib_up = (display>>4)&0x0F;
+    nib_do = display & 0x0F;
+    nib_up = (display>>4) & 0x0F;
     return nib_do, nib_up;
 }
 

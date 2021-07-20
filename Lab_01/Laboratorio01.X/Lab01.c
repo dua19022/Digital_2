@@ -31,15 +31,13 @@
 #include <xc.h>
 #include <stdint.h>
 #include <stdio.h>  // Para usar printf
+#include "Lib01.h"
 //-----------------------------------------------------------------------------
 //                            Variables 
 //-----------------------------------------------------------------------------
-
-char tabla[16] = {0b00111111, 0b00000110, 0b01011011, 
-                       0b01001111, 0b01100110, 0b01101101,
-                       0b01111101, 0b00000111, 0b01111111,
-                       0b01101111, 0b01110111, 0b01111100,
-                       0b00111001, 0b01011110, 0b01111001, 0b01110001};
+char tabla[16] = {0b00111111, 0b00000110, 0b01011011, 0b01001111, 0b01100110,
+    0b01101101, 0b01111101, 0b00000111, 0b01111111, 0b01101111, 0b01110111, 
+    0b01111100, 0b00111001, 0b01011110, 0b01111001, 0b01110001};
 int multi;
 int ADC;
 int flag;
@@ -72,7 +70,7 @@ void __interrupt() isr(void)
     {   
         RA5 = 0;
         RA6 = 0;
-        if (flag == 1){
+       if (flag == 1){
             PORTAbits.RA5 = 1; 
 //            PORTAbits.RA6 = 0;
             PORTD = tabla[nib_up];
@@ -180,21 +178,21 @@ void setup(void){
     PIR1bits.ADIF = 0;      // Bandera del ADC
     
     // Configuracion del ADC
-    ADCON0bits.ADCS0 = 0;
-    ADCON0bits.ADCS1 = 1;       // FOSC/32
-    ADCON0bits.ADON = 1;        // Activar el ADC  
-    ADCON0bits.CHS = 0;         // Canal 0
-    __delay_us(50);
-    
-    ADCON1bits.ADFM = 0;        // Justificado a la izquierda
-    ADCON1bits.VCFG0 = 0;       // Volataje de referencia vss y vddd
-    ADCON1bits.VCFG1 = 0;
+//    ADCON0bits.ADCS0 = 0;
+//    ADCON0bits.ADCS1 = 1;       // FOSC/32
+//    ADCON0bits.ADON = 1;        // Activar el ADC  
+//    ADCON0bits.CHS = 0;         // Canal 0
+//    __delay_us(50);  
+//    ADCON1bits.ADFM = 0;        // Justificado a la izquierda
+//    ADCON1bits.VCFG0 = 0;       // Volataje de referencia vss y vddd
+//    ADCON1bits.VCFG1 = 0;
 
+    ADC_conf(2);
 }
 
 char nibbles_setup (char display){    //funcion para recibir datos del ADC
-    nib_do = display&0x0F;       //Pasan bits menos significativos
-    nib_up = (display>>4)&0x0F; //paso a bits mas significativos
+    nib_do = display & 0x0F;       //Pasan bits menos significativos
+    nib_up = (display>>4) & 0x0F; //paso a bits mas significativos
     return nib_do, nib_up;
 }
 

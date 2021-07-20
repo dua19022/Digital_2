@@ -11,16 +11,18 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"61 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
+"59 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
 [v _isr isr `II(v  1 e 1 0 ]
-"109
+"107
 [v _main main `(v  1 e 1 0 ]
-"130
+"128
 [v _setup setup `(v  1 e 1 0 ]
-"195
+"193
 [v _nibbles_setup nibbles_setup `(uc  1 e 1 0 ]
-"201
+"199
 [v _alarma alarma `(v  1 e 1 0 ]
+"20 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lib01.c
+[v _ADC_conf ADC_conf `(v  1 e 1 0 ]
 "59 D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
 "166
@@ -191,15 +193,15 @@
 ]
 [u S301 . 1 `S290 1 . 1 0 `S292 1 . 1 0 ]
 [v _IOCBbits IOCBbits `VES301  1 e 1 @150 ]
-[s S335 . 1 `uc 1 . 1 0 :4:0 
+[s S474 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2991
-[u S341 . 1 `S335 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES341  1 e 1 @159 ]
+[u S480 . 1 `S474 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES480  1 e 1 @159 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
@@ -216,41 +218,49 @@
 [v _RBIF RBIF `VEb  1 e 0 @88 ]
 "4322
 [v _T0IF T0IF `VEb  1 e 0 @90 ]
-"44 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
-[v _ADC ADC `i  1 e 2 0 ]
-"45
-[v _flag flag `i  1 e 2 0 ]
-"47
-[v _nib_up nib_up `uc  1 e 1 0 ]
-"48
-[v _nib_do nib_do `uc  1 e 1 0 ]
-"15 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lib01.c
+"38 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
 [v _tabla tabla `[16]uc  1 e 16 0 ]
-"109 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
+"42
+[v _ADC ADC `i  1 e 2 0 ]
+"43
+[v _flag flag `i  1 e 2 0 ]
+"45
+[v _nib_up nib_up `uc  1 e 1 0 ]
+"46
+[v _nib_do nib_do `uc  1 e 1 0 ]
+"107
 [v _main main `(v  1 e 1 0 ]
 {
-"124
+"122
 } 0
-"130
+"128
 [v _setup setup `(v  1 e 1 0 ]
 {
-"193
+"191
 } 0
-"195
+"20 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lib01.c
+[v _ADC_conf ADC_conf `(v  1 e 1 0 ]
+{
+[v ADC_conf@frec frec `uc  1 a 1 wreg ]
+[v ADC_conf@frec frec `uc  1 a 1 wreg ]
+[v ADC_conf@frec frec `uc  1 a 1 2 ]
+"68
+} 0
+"193 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_01\Laboratorio01.X\Lab01.c
 [v _nibbles_setup nibbles_setup `(uc  1 e 1 0 ]
 {
 [v nibbles_setup@display display `uc  1 a 1 wreg ]
 [v nibbles_setup@display display `uc  1 a 1 wreg ]
 [v nibbles_setup@display display `uc  1 a 1 2 ]
-"199
+"197
 } 0
-"201
+"199
 [v _alarma alarma `(v  1 e 1 0 ]
 {
-"208
+"206
 } 0
-"61
+"59
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"104
+"102
 } 0
