@@ -8,51 +8,51 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef Lib_LCD_H
-#define	Lib_LCD_H
+#ifndef Lib_LCD
+#define	Lib_LCD
 
 #ifndef _XTAL_FREQ
 #define _XTAL_FREQ 4000000
 #endif
-
+// Se redefinen los bits segun las conexiones del proyecto actual
 #ifndef RS
-#define RS RE0
+#define RS PORTEbits.RE0 //se quita el PORTDbits para que no los tome todos en ese puerto
 #endif
 
 #ifndef EN
-#define EN RE1
+#define EN PORTEbits.RE2
 #endif
 
 #ifndef D0
-#define D0 RD0
+#define D0 PORTDbits.RD0
 #endif
 
 #ifndef D1
-#define D1 RD1
+#define D1 PORTDbits.RD1
 #endif
 
 #ifndef D2
-#define D2 RD2
+#define D2 PORTDbits.RD2
 #endif
 
 #ifndef D3
-#define D3 RD3
+#define D3 PORTDbits.RD3
 #endif
 
 #ifndef D4
-#define D4 RD4
+#define D4 PORTDbits.RD4
 #endif
 
 #ifndef D5
-#define D5 RD5
+#define D5 PORTDbits.RD5
 #endif
 
 #ifndef D6
-#define D6 RD6
+#define D6 PORTDbits.RD6
 #endif
 
 #ifndef D7
-#define D7 RD7
+#define D7 PORTDbits.RD7
 #endif
 
 #include <xc.h> // include processor files - each processor file is guarded.  
@@ -78,5 +78,4 @@ void Lcd_Shift_Right(void);
 
 void Lcd_Shift_Left(void);
 
-#endif	/* LCD_H */
-
+#endif

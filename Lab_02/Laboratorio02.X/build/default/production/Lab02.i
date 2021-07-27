@@ -7,7 +7,12 @@
 # 1 "D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "Lab02.c" 2
-# 12 "Lab02.c"
+
+
+
+
+
+
 # 1 "D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2488,7 +2493,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 12 "Lab02.c" 2
+# 7 "Lab02.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2623,7 +2628,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 13 "Lab02.c" 2
+# 8 "Lab02.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 1 3
 
@@ -2722,7 +2727,106 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 14 "Lab02.c" 2
+# 9 "Lab02.c" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
+
+
+
+
+
+
+typedef unsigned short wchar_t;
+
+
+
+
+
+
+
+typedef struct {
+ int rem;
+ int quot;
+} div_t;
+typedef struct {
+ unsigned rem;
+ unsigned quot;
+} udiv_t;
+typedef struct {
+ long quot;
+ long rem;
+} ldiv_t;
+typedef struct {
+ unsigned long quot;
+ unsigned long rem;
+} uldiv_t;
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+
+
+
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+
+
+
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+# 104 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+# 10 "Lab02.c" 2
+# 25 "Lab02.c"
+# 1 "./UART.h" 1
+# 15 "./UART.h"
+void Usart_con(void);
+# 25 "Lab02.c" 2
+
+# 1 "./ADC.h" 1
+# 14 "./ADC.h"
+#pragma config FOSC = INTRC_NOCLKOUT
+
+
+
+void config_ADC(char frec);
+# 26 "Lab02.c" 2
 
 # 1 "./Lib_LCD.h" 1
 # 63 "./Lib_LCD.h"
@@ -2743,32 +2847,36 @@ void Lcd_Write_String(char *a);
 void Lcd_Shift_Right(void);
 
 void Lcd_Shift_Left(void);
-# 15 "Lab02.c" 2
+# 27 "Lab02.c" 2
 
-# 1 "./Lib01.h" 1
-# 11 "./Lib01.h"
+
+
+
+
+
 #pragma config FOSC = INTRC_NOCLKOUT
 
 
-
-void ADC_conf(char frec);
-
-char translate_hex(char var);
-# 16 "Lab02.c" 2
-# 31 "Lab02.c"
-#pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
+
 #pragma config PWRTE = OFF
 #pragma config MCLRE = OFF
+
 #pragma config CP = OFF
+
 #pragma config CPD = OFF
+
 #pragma config BOREN = OFF
 #pragma config IESO = OFF
+
 #pragma config FCMEN = OFF
+
 #pragma config LVP = OFF
 
 
+
 #pragma config BOR4V = BOR40V
+
 #pragma config WRT = OFF
 
 
@@ -2776,115 +2884,208 @@ char translate_hex(char var);
 
 
 
+char volt01, volt02;
+char voltaje_b, voltaje_c;
+char dividendo, centenas, residuo, decenas, unidades;
+char dato1;
+char dato;
+char contador = 0;
 
-
-char volt01;
-char volt02;
-char div;
-char display;
-char ADC;
 
 
 
 
 
 void setup(void);
+char division (char dividendo);
+char voltajes (char voltajes_1);
+void setup(void);
+void putch(char data);
+void text(void);
 
+void __attribute__((picinterrupt(("")))) isr(void){
 
-
-
-
-void __attribute__((picinterrupt(("")))) isr(void)
-{
-
-       if(PIR1bits.ADIF == 1)
-       {
-           if(ADCON0bits.CHS == 0) {
-               ADC = ADRESH;
-           }
-           PIR1bits.ADIF = 0;
-       }
-
-        INTCONbits.T0IF = 0;
-        TMR0 = 255;
-
-
-}
-
-
-
-
-void main(void) {
-
-    setup();
-    char a;
-
-    Lcd_Init();
-    Lcd_Clear();
-
-    while(1)
-    {
-       Lcd_Set_Cursor(1, 1);
-       Lcd_Write_String("S_1: S_2 S_3:");
-       Lcd_Set_Cursor(2,1);
-       Lcd_Write_String("0.00");
-       _delay((unsigned long)((2000)*(4000000/4000.0)));
-
-       if (ADCON0bits.GO == 0){
-           _delay((unsigned long)((100)*(4000000/4000000.0)));
-           ADCON0bits.GO = 1;
+    if (ADIF){
+        if(ADCON0bits.CHS == 0){
+            ADCON0bits.CHS = 1;
+            volt01 = ADRESH;
+        }
+        else if(ADCON0bits.CHS == 1){
+            ADCON0bits.CHS = 0;
+            volt02 = ADRESH;
         }
     }
+    ADIF = 0;
+}
+# 105 "Lab02.c"
+void main(void){
+    setup();
+    Lcd_Init();
+    Lcd_Clear();
+    char buffer[20];
+    char buffer1[20];
+    char dato1;
+    char dato;
+    Lcd_Set_Cursor(1,1);
+    Lcd_Write_String("S_1:  S_2:  S_3:");
+
+
+
+    while(1){
+
+    dato = volt01*0.0196;
+    dato1 = volt02*0.0196;
+    sprintf(buffer, "%d V   ", dato);
+    sprintf(buffer1, "%d V ", dato1);
+
+    Lcd_Set_Cursor(2,2);
+    Lcd_Write_String(buffer);
+    Lcd_Write_String(buffer1);
+    Lcd_Write_String('  ');
+
+
+
+
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+
+    if (ADCON0bits.GO == 0){
+            _delay((unsigned long)((100)*(4000000/4000000.0)));
+            ADCON0bits.GO = 1;
+        }
+
+    division(volt01);
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("Valor del POT1:\r");
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = centenas;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = 46;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = decenas;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = unidades;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("\r");
+
+
+    division(volt02);
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("Valor del POT2:\r");
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = centenas;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = 46;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = decenas;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    TXREG = unidades;
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("\r");
+
+    division(contador);
+    Lcd_Write_Char(centenas);
+    Lcd_Write_Char(decenas);
+    Lcd_Write_Char(unidades);
+
+
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("\r Si desea aumentar contador, oprima +\r");
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("\r Si desea disminuir contador, oprima -\r");
+    _delay((unsigned long)((250)*(4000000/4000.0)));
+    printf("\r Si no desea realizar nada oprima *\r");
+    while(RCIF == 0);
+    char answer = RCREG;
+    if (answer == '+'){
+        contador = contador + 1;
+    }
+    else if (answer == '-'){
+        contador = contador - 1;
+    }
+    else if (answer == '*'){
+        (0);
+    }
+    }
+
+    return;
 }
 
+void putch(char data){
+    while(TXIF == 0);
+    TXREG = data;
+    return;
+}
+
+char division (char valor){
+    centenas = valor/100;
+    residuo = valor%100;
+    decenas = residuo/10;
+    unidades = residuo%10;
+
+
+    centenas = centenas + 48;
+    decenas = decenas + 48;
+    unidades = unidades + 48;
+}
+
+char voltajes(char voltaje_1){
+    char voltaje_a;
+    return voltaje_a = division(voltaje_1);
+}
 
 
 
 
 void setup(void){
 
-
-
     ANSEL = 0b00000011;
-    ANSELH = 0x00;
-
-
     TRISAbits.TRISA0 = 1;
     TRISAbits.TRISA1 = 1;
-    TRISCbits.TRISC6 = 0;
-    TRISCbits.TRISC7 = 0;
+
+
     TRISD = 0x00;
     TRISE = 0x00;
 
 
+
+    OSCCONbits.IRCF0 = 0;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.SCS = 1;
+
+
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF = 0;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 0;
+    PIE1bits.TXIE = 0;
+
+
     PORTA = 0x00;
+    PORTB = 0x00;
     PORTC = 0x00;
     PORTD = 0x00;
     PORTE = 0x00;
 
 
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 0;
-    OSCCONbits.SCS = 1;
+    config_ADC(1);
 
 
-    OPTION_REGbits.T0CS = 0;
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS2 = 1;
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS0 = 1;
+    TXSTAbits.SYNC = 0;
+    TXSTAbits.BRGH = 1;
+    BAUDCTLbits.BRG16 = 0;
 
+    SPBRG = 25;
+    SPBRGH = 1;
 
+    RCSTAbits.SPEN = 1;
+    RCSTAbits.RX9 = 0;
+    RCSTAbits.CREN = 1;
+    TXSTAbits.TX9 = 0;
 
-    INTCONbits.GIE = 1;
-    INTCONbits.RBIF = 1;
-    INTCONbits.RBIE = 1;
-    INTCONbits.PEIE = 1;
-    INTCONbits.T0IF = 0;
-    PIE1bits.ADIE = 1;
-    PIR1bits.ADIF = 0;
+    TXSTAbits.TXEN = 1;
 
-
-
+    PIR1bits.RCIF = 0;
+    PIR1bits.TXIF = 0;
 }

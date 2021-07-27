@@ -1,29 +1,23 @@
-///* 
-// * File:   Lib01.c
-// * Author: marco
-// *
-// * Created on July 19, 2021, 8:09 PM
-// */
-#define _XTAL_FREQ 250000
+#include <xc.h> 
+#include <stdint.h>  
+#include "ADC.h"
+
+#define _XTAL_FREQ 4000000
+
+
 #include <xc.h>
 #include <stdint.h>
-#include "Lib01.h"
-////-----------------------------------------------------------------------------
-////                            Variables 
-////-----------------------------------------------------------------------------
+#include <pic16f887.h> 
+#include "ADC.h" //esta es la libreria que estamos utilizando
+#define _XTAL_FREQ 4000000
 
-
-
-////-----------------------------------------------------------------------------
-////                            Funciones
-////-----------------------------------------------------------------------------
-void ADC_conf(char frec) { //en este caso para seleccionar la frecuencia ADC
+void config_ADC(char frec) { //en este caso para seleccionar la frecuencia ADC
     switch(frec){
         case 0: //FOSC/2
             ADCON0bits.CHS = 0;     //canal 0
             __delay_us(100);
     
-            ADCON0bits.ADCS0 = 0;   //para que el clock select sea FOSC/2
+            ADCON0bits.ADCS0 = 0;   //para que el clock select sea FOSC/
             ADCON0bits.ADCS1 = 0;   
             ADCON0bits.ADON = 1;    //ADC enable bit
             ADCON1bits.ADFM = 0;    //left justified
@@ -66,9 +60,3 @@ void ADC_conf(char frec) { //en este caso para seleccionar la frecuencia ADC
     }
     return;
 }
-
-//char translate_hex(char var){
-//    char hex_code;
-//    hex_code = tabla[var];
-//    return hex_code;
-//}
