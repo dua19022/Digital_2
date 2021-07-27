@@ -2886,7 +2886,7 @@ void Lcd_Shift_Left(void);
 
 char volt01, volt02;
 char voltaje_b, voltaje_c;
-char dividendo, centenas, residuo, decenas, unidades;
+char valor, hundreds, residuo, tens, units;
 char dato1;
 char dato;
 char contador = 0;
@@ -2897,11 +2897,10 @@ char contador = 0;
 
 
 void setup(void);
-char division (char dividendo);
+char division (char valor);
 char voltajes (char voltajes_1);
 void setup(void);
 void putch(char data);
-void text(void);
 
 void __attribute__((picinterrupt(("")))) isr(void){
 
@@ -2917,15 +2916,13 @@ void __attribute__((picinterrupt(("")))) isr(void){
     }
     ADIF = 0;
 }
-# 105 "Lab02.c"
+# 104 "Lab02.c"
 void main(void){
     setup();
     Lcd_Init();
     Lcd_Clear();
     char buffer[20];
     char buffer1[20];
-    char dato1;
-    char dato;
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("S_1:  S_2:  S_3:");
 
@@ -2957,13 +2954,13 @@ void main(void){
     _delay((unsigned long)((250)*(4000000/4000.0)));
     printf("Valor del POT1:\r");
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = centenas;
+    TXREG = hundreds;
     _delay((unsigned long)((250)*(4000000/4000.0)));
     TXREG = 46;
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = decenas;
+    TXREG = tens;
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = unidades;
+    TXREG = units;
     _delay((unsigned long)((250)*(4000000/4000.0)));
     printf("\r");
 
@@ -2972,20 +2969,20 @@ void main(void){
     _delay((unsigned long)((250)*(4000000/4000.0)));
     printf("Valor del POT2:\r");
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = centenas;
+    TXREG = hundreds;
     _delay((unsigned long)((250)*(4000000/4000.0)));
     TXREG = 46;
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = decenas;
+    TXREG = tens;
     _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = unidades;
+    TXREG = units;
     _delay((unsigned long)((250)*(4000000/4000.0)));
     printf("\r");
 
     division(contador);
-    Lcd_Write_Char(centenas);
-    Lcd_Write_Char(decenas);
-    Lcd_Write_Char(unidades);
+    Lcd_Write_Char(hundreds);
+    Lcd_Write_Char(tens);
+    Lcd_Write_Char(units);
 
 
     _delay((unsigned long)((250)*(4000000/4000.0)));
@@ -3017,15 +3014,15 @@ void putch(char data){
 }
 
 char division (char valor){
-    centenas = valor/100;
+    hundreds = valor/100;
     residuo = valor%100;
-    decenas = residuo/10;
-    unidades = residuo%10;
+    tens = residuo/10;
+    units = residuo%10;
 
 
-    centenas = centenas + 48;
-    decenas = decenas + 48;
-    unidades = unidades + 48;
+    hundreds = hundreds + 48;
+    tens = tens + 48;
+    units = units + 48;
 }
 
 char voltajes(char voltaje_1){

@@ -33,15 +33,15 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"82 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
+"81 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
 [v _isr isr `II(v  1 e 1 0 ]
-"105
+"104
 [v _main main `(v  1 e 1 0 ]
-"197
+"194
 [v _putch putch `(v  1 e 1 0 ]
-"203
+"200
 [v _division division `(uc  1 e 1 0 ]
-"223
+"220
 [v _setup setup `(v  1 e 1 0 ]
 "12 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lib_LCD.c
 [v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
@@ -69,14 +69,14 @@
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "414
 [v _PORTE PORTE `VEuc  1 e 1 @9 ]
-[s S480 . 1 `uc 1 RE0 1 0 :1:0 
+[s S478 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
 "427
-[u S485 . 1 `S480 1 . 1 0 ]
-[v _PORTEbits PORTEbits `VES485  1 e 1 @9 ]
+[u S483 . 1 `S478 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES483  1 e 1 @9 ]
 [s S212 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
@@ -220,15 +220,15 @@
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2704
 [v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
-[s S550 . 1 `uc 1 . 1 0 :4:0 
+[s S548 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2991
-[u S556 . 1 `S550 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES556  1 e 1 @159 ]
+[u S554 . 1 `S548 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES554  1 e 1 @159 ]
 [s S291 . 1 `uc 1 ABDEN 1 0 :1:0 
 `uc 1 WUE 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
@@ -253,34 +253,34 @@
 [v _volt01 volt01 `uc  1 e 1 0 ]
 [v _volt02 volt02 `uc  1 e 1 0 ]
 "65
-[v _centenas centenas `uc  1 e 1 0 ]
+[v _hundreds hundreds `uc  1 e 1 0 ]
 [v _residuo residuo `uc  1 e 1 0 ]
-[v _decenas decenas `uc  1 e 1 0 ]
-[v _unidades unidades `uc  1 e 1 0 ]
+[v _tens tens `uc  1 e 1 0 ]
+[v _units units `uc  1 e 1 0 ]
+"66
+[v _dato1 dato1 `uc  1 e 1 0 ]
+"67
+[v _dato dato `uc  1 e 1 0 ]
 "68
 [v _contador contador `uc  1 e 1 0 ]
-"105
+"104
 [v _main main `(v  1 e 1 0 ]
 {
-"182
-[v main@answer answer `uc  1 a 1 42 ]
-"110
-[v main@buffer1 buffer1 `[20]uc  1 a 20 20 ]
+"179
+[v main@answer answer `uc  1 a 1 40 ]
 "109
+[v main@buffer1 buffer1 `[20]uc  1 a 20 20 ]
+"108
 [v main@buffer buffer `[20]uc  1 a 20 0 ]
-"112
-[v main@dato dato `uc  1 a 1 41 ]
-"111
-[v main@dato1 dato1 `uc  1 a 1 40 ]
-"195
+"192
 } 0
 "13 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@wh wh `*.4uc  1 a 1 wreg ]
-[s S1082 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
+[s S1080 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
 "29
-[v sprintf@pb pb `S1082  1 a 2 27 ]
+[v sprintf@pb pb `S1080  1 a 2 27 ]
 "28
 [v sprintf@ap ap `[1]*.4v  1 a 1 26 ]
 "13
@@ -290,10 +290,10 @@
 [v sprintf@wh wh `*.4uc  1 a 1 25 ]
 "38
 } 0
-"223 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
+"220 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"275
+"272
 } 0
 "14 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\ADC.c
 [v _config_ADC config_ADC `(v  1 e 1 0 ]
@@ -307,9 +307,9 @@
 [v _printf printf `(i  1 e 2 0 ]
 {
 [v printf@f f `*.24DCuc  1 a 1 wreg ]
-[s S1082 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
+[s S1080 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
 "21
-[v printf@pb pb `S1082  1 a 2 24 ]
+[v printf@pb pb `S1080  1 a 2 24 ]
 "15
 [v printf@ap ap `[1]*.4v  1 a 1 22 ]
 "13
@@ -321,8 +321,8 @@
 "471 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\doprnt.c
 [v __doprnt _doprnt `(i  1 e 2 0 ]
 {
-[s S1082 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
-[v __doprnt@pb pb `*.4S1082  1 a 1 wreg ]
+[s S1080 __prbuf 2 `*.4uc 1 ptr 1 0 `*.27(v 1 func 1 1 ]
+[v __doprnt@pb pb `*.4S1080  1 a 1 wreg ]
 "545
 [v __doprnt@val val `ui  1 a 2 16 ]
 "512
@@ -332,17 +332,17 @@
 "525
 [v __doprnt@flag flag `uc  1 a 1 14 ]
 "471
-[v __doprnt@pb pb `*.4S1082  1 a 1 wreg ]
+[v __doprnt@pb pb `*.4S1080  1 a 1 wreg ]
 [v __doprnt@f f `*.24DCuc  1 p 1 9 ]
 [v __doprnt@ap ap `*.4*.4v  1 p 1 10 ]
-[v __doprnt@pb pb `*.4S1082  1 a 1 19 ]
+[v __doprnt@pb pb `*.4S1080  1 a 1 19 ]
 "1567
 } 0
-"197 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
+"194 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
 [v _putch putch `(v  1 e 1 0 ]
 {
 [v putch@data data `uc  1 p 1 3 ]
-"201
+"198
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -366,13 +366,13 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 5 ]
 "30
 } 0
-"203 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
+"200 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
 [v _division division `(uc  1 e 1 0 ]
 {
 [v division@valor valor `uc  1 a 1 wreg ]
 [v division@valor valor `uc  1 a 1 wreg ]
 [v division@valor valor `uc  1 a 1 7 ]
-"213
+"210
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -426,17 +426,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S934 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S932 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S939 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S942 . 4 `l 1 i 4 0 `d 1 f 4 0 `S934 1 fAsBytes 4 0 `S939 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S942  1 a 4 30 ]
+[s S937 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S940 . 4 `l 1 i 4 0 `d 1 f 4 0 `S932 1 fAsBytes 4 0 `S937 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S940  1 a 4 30 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 24 ]
-[s S1011 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1009 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1014 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1011 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1014  1 a 2 34 ]
+[u S1012 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1009 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1012  1 a 2 34 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 29 ]
 "11
@@ -525,8 +525,8 @@
 [v Lcd_Port@a a `uc  1 a 1 3 ]
 "15
 } 0
-"82 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
+"81 D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_02\Laboratorio02.X\Lab02.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"95
+"94
 } 0

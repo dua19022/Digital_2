@@ -62,9 +62,9 @@
 
 char volt01, volt02;
 char voltaje_b, voltaje_c;
-char dividendo, centenas, residuo, decenas, unidades;
+char valor, hundreds, residuo, tens, units;
 char dato1;
-char dato; //el dato que deseo almacenar en un str
+char dato; 
 char contador = 0;
 
 
@@ -73,11 +73,10 @@ char contador = 0;
                         INTERRUPCIONES Y PROTOTIPOS
  =============================================================================*/
 void setup(void);
-char division (char dividendo);
+char division (char valor);
 char voltajes (char voltajes_1);
 void setup(void);   // Defino las funciones antes de crearlas
 void putch(char data); //funcion para recibir el dato que se desea transmitir
-void text(void);    // Donde se introduce las cadenas de texto
 
 void __interrupt() isr(void){
     //interrupcion del ADC para los dos pot
@@ -108,29 +107,25 @@ void main(void){
     Lcd_Clear(); //limpio lo que tenga la LCD siempre llamandolo de la lib
     char buffer[20]; //esta variable almacenara mi voltaje en un string
     char buffer1[20];
-    char dato1;
-    char dato; //el dato que deseo almacenar en un str
     Lcd_Set_Cursor(1,1); //ir a la primera linea en la posicion 1
     Lcd_Write_String("S_1:  S_2:  S_3:"); //imprimir los indicadores de voltaje
     
     
     
     while(1){   
-   
+   // se multiplica para poder tener el valor en voltaje
     dato = volt01*0.0196; 
     dato1 = volt02*0.0196;
+    // se traducen los datos para poder desplegarlos
     sprintf(buffer, "%d V   ", dato); 
     sprintf(buffer1, "%d V ", dato1);
     
-    Lcd_Set_Cursor(2,2); //ahora ir a la segunda linea
-    Lcd_Write_String(buffer); //mostrar lo que esta en mi string anterior
+    Lcd_Set_Cursor(2,2); // Se pone la posicion
+    Lcd_Write_String(buffer);   // Se despliegan los datos traducidos
     Lcd_Write_String(buffer1);
-    Lcd_Write_String('  ');
+    Lcd_Write_String('  '); // Se deja un espacio para el contador 
     
-//    Lcd_Write_String(contador);
-    
-    
-    __delay_ms(1000); //un delay para asegurar que la busy flag permita recibir
+    __delay_ms(1000); //un delay 
          
     if (ADCON0bits.GO == 0){ //se apaga automaticamente entonces hay que
             __delay_us(100);     //volver a encenderlo
@@ -141,35 +136,36 @@ void main(void){
     __delay_ms(250); //Tiempos para el despliegue de los caracteres
     printf("Valor del POT1:\r");
     __delay_ms(250);
-    TXREG = centenas;
+    TXREG = hundreds;
     __delay_ms(250);
     TXREG = 46;
     __delay_ms(250);
-    TXREG = decenas;
+    TXREG = tens;
     __delay_ms(250);
-    TXREG = unidades;
+    TXREG = units;
     __delay_ms(250);
     printf("\r");
     
     // Se despliega el valor del pot 2
     division(volt02);
-    __delay_ms(250); //Tiempos para el despliegue de los caracteres
+    __delay_ms(250); 
     printf("Valor del POT2:\r");
     __delay_ms(250);
-    TXREG = centenas;
+    TXREG = hundreds;
     __delay_ms(250);
     TXREG = 46;
     __delay_ms(250);
-    TXREG = decenas;
+    TXREG = tens;
     __delay_ms(250);
-    TXREG = unidades;
+    TXREG = units;
     __delay_ms(250);
     printf("\r");
     
+    // aque se hace la division del contador y se despliega
     division(contador);
-    Lcd_Write_Char(centenas);
-    Lcd_Write_Char(decenas);
-    Lcd_Write_Char(unidades);
+    Lcd_Write_Char(hundreds);
+    Lcd_Write_Char(tens);
+    Lcd_Write_Char(units);
     
     // Se pregunta si se quiere aumentar o disminuir el contador
     __delay_ms(250);
@@ -201,15 +197,14 @@ void putch(char data){      // Funcion especifica de libreria stdio.h
 }
 
 char division (char valor){
-    centenas = valor/100;//esto me divide entre 100 y se queda con el entero
+    hundreds = valor/100;//esto me divide entre 100 y se queda con el entero
     residuo = valor%100; //el residuo de lo que estoy operando
-    decenas = residuo/10; 
-    unidades = residuo%10; //se queda con las unidades de las decenas
-    //las variables estan en todo el codigo entonces no necesito el return
-//    return dividendo;
-    centenas = centenas + 48;
-    decenas = decenas + 48;
-    unidades = unidades + 48;
+    tens = residuo/10; 
+    units = residuo%10; //se queda con las units de las tens
+    // Se les suma 47 para que me den al valor requerido
+    hundreds = hundreds + 48;
+    tens = tens + 48;
+    units = units + 48;
 } 
 
 char voltajes(char voltaje_1){
