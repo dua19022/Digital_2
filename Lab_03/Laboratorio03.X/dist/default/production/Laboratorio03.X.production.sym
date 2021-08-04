@@ -318,7 +318,7 @@ strings 800 939 STRING 800 0
 text18 93A FFF CODE 93A 0
 %locals
 dist/default/production\Laboratorio03.X.production.o
-C:\Users\marco\AppData\Local\Temp\sgnc.s
+C:\Users\marco\AppData\Local\Temp\sbtc.s
 1036 F 0 CODE 0
 1039 F 0 CODE 0
 1092 F 0 CODE 0
@@ -651,7 +651,7 @@ Lab03.c
 73 3F1 0 CODE 0
 76 3F1 0 CODE 0
 73 4 0 CODE 0
-C:\Users\marco\AppData\Local\Temp\sgnc.s
+C:\Users\marco\AppData\Local\Temp\sbtc.s
 5674 26 0 ENTRY 0
 5676 26 0 ENTRY 0
 5677 26 0 ENTRY 0

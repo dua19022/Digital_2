@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\marco\AppData\Local\Temp\sgnc.o
+$C:\Users\marco\AppData\Local\Temp\sbtc.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -100,42 +100,42 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Laboratorio03.X.production.o
-F cinit CODE >1036:C:\Users\marco\AppData\Local\Temp\sgnc.s
-F cinit CODE >1039:C:\Users\marco\AppData\Local\Temp\sgnc.s
-F cinit CODE >1092:C:\Users\marco\AppData\Local\Temp\sgnc.s
-10 cinit CODE >1093:C:\Users\marco\AppData\Local\Temp\sgnc.s
-11 cinit CODE >1096:C:\Users\marco\AppData\Local\Temp\sgnc.s
-12 cinit CODE >1097:C:\Users\marco\AppData\Local\Temp\sgnc.s
-13 cinit CODE >1098:C:\Users\marco\AppData\Local\Temp\sgnc.s
-14 cinit CODE >1099:C:\Users\marco\AppData\Local\Temp\sgnc.s
-15 cinit CODE >1100:C:\Users\marco\AppData\Local\Temp\sgnc.s
-16 cinit CODE >1103:C:\Users\marco\AppData\Local\Temp\sgnc.s
-17 cinit CODE >1104:C:\Users\marco\AppData\Local\Temp\sgnc.s
-18 cinit CODE >1105:C:\Users\marco\AppData\Local\Temp\sgnc.s
-19 cinit CODE >1106:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1A cinit CODE >1107:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1B cinit CODE >1108:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1C cinit CODE >1109:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1D cinit CODE >1110:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1E cinit CODE >1111:C:\Users\marco\AppData\Local\Temp\sgnc.s
-1F cinit CODE >1112:C:\Users\marco\AppData\Local\Temp\sgnc.s
-20 cinit CODE >1113:C:\Users\marco\AppData\Local\Temp\sgnc.s
-21 cinit CODE >1114:C:\Users\marco\AppData\Local\Temp\sgnc.s
-22 cinit CODE >1120:C:\Users\marco\AppData\Local\Temp\sgnc.s
-22 cinit CODE >1122:C:\Users\marco\AppData\Local\Temp\sgnc.s
-23 cinit CODE >1123:C:\Users\marco\AppData\Local\Temp\sgnc.s
-26 functab ENTRY >5674:C:\Users\marco\AppData\Local\Temp\sgnc.s
-26 functab ENTRY >5676:C:\Users\marco\AppData\Local\Temp\sgnc.s
-26 functab ENTRY >5677:C:\Users\marco\AppData\Local\Temp\sgnc.s
-26 functab ENTRY >5678:C:\Users\marco\AppData\Local\Temp\sgnc.s
-27 functab ENTRY >5679:C:\Users\marco\AppData\Local\Temp\sgnc.s
-28 functab ENTRY >5680:C:\Users\marco\AppData\Local\Temp\sgnc.s
-29 functab ENTRY >5681:C:\Users\marco\AppData\Local\Temp\sgnc.s
-2A functab ENTRY >5682:C:\Users\marco\AppData\Local\Temp\sgnc.s
-2B functab ENTRY >5684:C:\Users\marco\AppData\Local\Temp\sgnc.s
-2B functab ENTRY >5685:C:\Users\marco\AppData\Local\Temp\sgnc.s
-2C functab ENTRY >5688:C:\Users\marco\AppData\Local\Temp\sgnc.s
-2C functab ENTRY >5689:C:\Users\marco\AppData\Local\Temp\sgnc.s
+F cinit CODE >1036:C:\Users\marco\AppData\Local\Temp\sbtc.s
+F cinit CODE >1039:C:\Users\marco\AppData\Local\Temp\sbtc.s
+F cinit CODE >1092:C:\Users\marco\AppData\Local\Temp\sbtc.s
+10 cinit CODE >1093:C:\Users\marco\AppData\Local\Temp\sbtc.s
+11 cinit CODE >1096:C:\Users\marco\AppData\Local\Temp\sbtc.s
+12 cinit CODE >1097:C:\Users\marco\AppData\Local\Temp\sbtc.s
+13 cinit CODE >1098:C:\Users\marco\AppData\Local\Temp\sbtc.s
+14 cinit CODE >1099:C:\Users\marco\AppData\Local\Temp\sbtc.s
+15 cinit CODE >1100:C:\Users\marco\AppData\Local\Temp\sbtc.s
+16 cinit CODE >1103:C:\Users\marco\AppData\Local\Temp\sbtc.s
+17 cinit CODE >1104:C:\Users\marco\AppData\Local\Temp\sbtc.s
+18 cinit CODE >1105:C:\Users\marco\AppData\Local\Temp\sbtc.s
+19 cinit CODE >1106:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1A cinit CODE >1107:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1B cinit CODE >1108:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1C cinit CODE >1109:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1D cinit CODE >1110:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1E cinit CODE >1111:C:\Users\marco\AppData\Local\Temp\sbtc.s
+1F cinit CODE >1112:C:\Users\marco\AppData\Local\Temp\sbtc.s
+20 cinit CODE >1113:C:\Users\marco\AppData\Local\Temp\sbtc.s
+21 cinit CODE >1114:C:\Users\marco\AppData\Local\Temp\sbtc.s
+22 cinit CODE >1120:C:\Users\marco\AppData\Local\Temp\sbtc.s
+22 cinit CODE >1122:C:\Users\marco\AppData\Local\Temp\sbtc.s
+23 cinit CODE >1123:C:\Users\marco\AppData\Local\Temp\sbtc.s
+26 functab ENTRY >5674:C:\Users\marco\AppData\Local\Temp\sbtc.s
+26 functab ENTRY >5676:C:\Users\marco\AppData\Local\Temp\sbtc.s
+26 functab ENTRY >5677:C:\Users\marco\AppData\Local\Temp\sbtc.s
+26 functab ENTRY >5678:C:\Users\marco\AppData\Local\Temp\sbtc.s
+27 functab ENTRY >5679:C:\Users\marco\AppData\Local\Temp\sbtc.s
+28 functab ENTRY >5680:C:\Users\marco\AppData\Local\Temp\sbtc.s
+29 functab ENTRY >5681:C:\Users\marco\AppData\Local\Temp\sbtc.s
+2A functab ENTRY >5682:C:\Users\marco\AppData\Local\Temp\sbtc.s
+2B functab ENTRY >5684:C:\Users\marco\AppData\Local\Temp\sbtc.s
+2B functab ENTRY >5685:C:\Users\marco\AppData\Local\Temp\sbtc.s
+2C functab ENTRY >5688:C:\Users\marco\AppData\Local\Temp\sbtc.s
+2C functab ENTRY >5689:C:\Users\marco\AppData\Local\Temp\sbtc.s
 4 intentry CODE >73:D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_03\Laboratorio03.X\Lab03.c
 3F1 text21 CODE >73:D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_03\Laboratorio03.X\Lab03.c
 3F1 text21 CODE >76:D:\University\2021\Semestre 2\Digital 2\Laboratorios\Digital_2\Lab_03\Laboratorio03.X\Lab03.c
@@ -451,7 +451,7 @@ __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 5E 0 ABS 0 strings -
 _RCIF 65 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 _TXIF 64 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\marco\AppData\Local\Temp\sgnc.o
+___sp 0 0 STACK 2 stack C:\Users\marco\AppData\Local\Temp\sbtc.o
 _atoi 93A 0 CODE 0 text18 dist/default/production\Laboratorio03.X.production.o
 _full A0 0 BANK1 1 bssBANK1 dist/default/production\Laboratorio03.X.production.o
 _main BE8 0 CODE 0 maintext dist/default/production\Laboratorio03.X.production.o
@@ -459,7 +459,7 @@ _pot1 A9 0 BANK1 1 bssBANK1 dist/default/production\Laboratorio03.X.production.o
 _pot2 A8 0 BANK1 1 bssBANK1 dist/default/production\Laboratorio03.X.production.o
 _tens 7A 0 COMMON 1 bssCOMMON dist/default/production\Laboratorio03.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
-start 18 0 CODE 0 init C:\Users\marco\AppData\Local\Temp\sgnc.o
+start 18 0 CODE 0 init C:\Users\marco\AppData\Local\Temp\sbtc.o
 __size_of___awdiv 0 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 __size_of___awmod 0 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 __pfunctab 4C 0 ENTRY 0 functab dist/default/production\Laboratorio03.X.production.o
@@ -474,12 +474,12 @@ printf@f 36 0 BANK0 1 cstackBANK0 dist/default/production\Laboratorio03.X.produc
 ___awmod@sign 78 0 COMMON 1 cstackCOMMON dist/default/production\Laboratorio03.X.production.o
 __size_of__doprnt 0 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 ?_concat 3A 0 BANK0 1 cstackBANK0 dist/default/production\Laboratorio03.X.production.o
-intlevel0 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
-intlevel1 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
-intlevel2 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
-intlevel3 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
-intlevel4 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
-intlevel5 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sgnc.o
+intlevel0 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
+intlevel1 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
+intlevel2 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
+intlevel3 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
+intlevel4 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
+intlevel5 4C 0 ENTRY 0 functab C:\Users\marco\AppData\Local\Temp\sbtc.o
 __LbssCOMMON 5E 0 ABS 0 bssCOMMON -
 _division A40 0 CODE 0 text8 dist/default/production\Laboratorio03.X.production.o
 strcat@from 72 0 COMMON 1 cstackCOMMON dist/default/production\Laboratorio03.X.production.o
@@ -511,8 +511,8 @@ __end_of___lwdiv DDE 0 CODE 0 text17 dist/default/production\Laboratorio03.X.pro
 __end_of___lwmod ED0 0 CODE 0 text16 dist/default/production\Laboratorio03.X.production.o
 __size_of_isdigit 0 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 __end_of_concat E58 0 CODE 0 text11 dist/default/production\Laboratorio03.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\marco\AppData\Local\Temp\sgnc.o
-___stacklo 0 0 ABS 0 - C:\Users\marco\AppData\Local\Temp\sgnc.o
+___stackhi 0 0 ABS 0 - C:\Users\marco\AppData\Local\Temp\sbtc.o
+___stacklo 0 0 ABS 0 - C:\Users\marco\AppData\Local\Temp\sbtc.o
 _dpowers 80C 0 STRING 0 strings dist/default/production\Laboratorio03.X.production.o
 _BAUDCTLbits 187 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 ___lwdiv@quotient 77 0 COMMON 1 cstackCOMMON dist/default/production\Laboratorio03.X.production.o
@@ -534,7 +534,7 @@ _TRISC3 43B 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 _TRISC5 43D 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 __end_of_printf 784 0 CODE 0 text7 dist/default/production\Laboratorio03.X.production.o
 _residuo 6B 0 BANK0 1 bssBANK0 dist/default/production\Laboratorio03.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\marco\AppData\Local\Temp\sgnc.o
+___int_sp 0 0 STACK 2 stack C:\Users\marco\AppData\Local\Temp\sbtc.o
 __Hbank0 5E 0 ABS 0 bank0 -
 __Hbank1 5E 0 ABS 0 bank1 -
 __Hbank2 5E 0 ABS 0 bank2 -
@@ -600,7 +600,7 @@ strcat@to 74 0 COMMON 1 cstackCOMMON dist/default/production\Laboratorio03.X.pro
 __end_of_isr 7F0 0 CODE 0 text21 dist/default/production\Laboratorio03.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
 __stringtab 800 0 STRING 0 strings dist/default/production\Laboratorio03.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\marco\AppData\Local\Temp\sgnc.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\marco\AppData\Local\Temp\sbtc.o
 __fptable 4C 0 ENTRY 0 functab dist/default/production\Laboratorio03.X.production.o
 __size_of___wmul 0 0 ABS 0 - dist/default/production\Laboratorio03.X.production.o
 __LbssBANK0 5E 0 ABS 0 bssBANK0 -

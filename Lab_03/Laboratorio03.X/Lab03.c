@@ -1,5 +1,5 @@
 /******************************************************************************
- * Laboratorio 1
+ * Laboratorio 3
  ******************************************************************************
  * File:   Lab01.c
  * Author: Marco
@@ -65,7 +65,7 @@ void setup(void);
 void ReadSlave(void);
 char division (char valor);
 void mensaje(void);
-//int concat(int a, int b, int c);
+
 
 //-----------------------------------------------------------------------------
 //                            Interrupciones
@@ -245,12 +245,12 @@ int concat(int a, int b)
  
     char s1[20];
     char s2[20];
-//    char s3[20]
+
  
     // Convert both the integers to string
     sprintf(s1, "%d", a);
     sprintf(s2, "%d", b);
-//    sprintf(s2, "%d", c);
+
  
     // Concatenate both strings
     strcat(s1, s2);
