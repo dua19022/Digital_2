@@ -77,9 +77,23 @@ void main(void) {
     while(1)    // Equivale al loop
     {
 
+        //Obtener informacion del primer slave
         I2C_Master_Start();
-        I2C_Master_Write(0x51);
-        PORTB = I2C_Master_Read(0);
+        I2C_Master_Write(0x51); //51, el 1 para que lea
+        PORTB = I2C_Master_Read(0); //lo escribo en el puerto de leds
+        I2C_Master_Stop();
+        __delay_ms(200);
+       //Obtener informacion del sensor de temperatura
+        //Direccion 0x90 porque A0 A1 y A2 estan a tierra
+        I2C_Master_Start();
+        I2C_Master_Write(0x80); //seleccionar el sensor y se escribe
+        I2C_Master_Write(0xF3); //read temperature
+        I2C_Master_Stop();
+        __delay_ms(200);
+        
+        I2C_Master_Start();
+        I2C_Master_Write(0x81); //para que ahora lea
+        PORTD = I2C_Master_Read(0); //read temperature
         I2C_Master_Stop();
         __delay_ms(200);
 
@@ -96,9 +110,7 @@ void setup(void){
     ANSELH = 0;
     TRISB = 0;
     PORTB = 0;
-    
-    TRISCbits.TRISC3 = 1;
-    TRISCbits.TRISC4 = 1;
+    TRISD = 0;
     
     //limpiar puertos
     PORTA = 0x00;

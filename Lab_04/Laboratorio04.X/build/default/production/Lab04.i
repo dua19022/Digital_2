@@ -2936,9 +2936,23 @@ void main(void) {
     while(1)
     {
 
+
         I2C_Master_Start();
         I2C_Master_Write(0x51);
         PORTB = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+
+
+        I2C_Master_Start();
+        I2C_Master_Write(0x80);
+        I2C_Master_Write(0xF3);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+
+        I2C_Master_Start();
+        I2C_Master_Write(0x81);
+        PORTD = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(4000000/4000.0)));
 
@@ -2955,9 +2969,7 @@ void setup(void){
     ANSELH = 0;
     TRISB = 0;
     PORTB = 0;
-
-    TRISCbits.TRISC3 = 1;
-    TRISCbits.TRISC4 = 1;
+    TRISD = 0;
 
 
     PORTA = 0x00;
@@ -2971,6 +2983,6 @@ void setup(void){
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.SCS = 1;
-# 123 "Lab04.c"
+# 135 "Lab04.c"
     I2C_Master_Init(100000);
 }
