@@ -1,5 +1,5 @@
 /******************************************************************************
- * Laboratorio 3
+ * Laboratorio 4 - MASTER
  ******************************************************************************
  * File:   Lab01.c
  * Author: Marco
@@ -20,6 +20,8 @@
 
 // Librerias propias
 #include "I2C.h"
+#include "LCD_4.h"
+//#include "ADC.h"
 
 
 //-----------------------------------------------------------------------------
@@ -44,20 +46,38 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
+#define RS RE0
+#define EN RE1
+#define D4 RC2
+#define D5 RC1
+#define D6 RC0
+#define D7 RC5
+
 
 //-----------------------------------------------------------------------------
 //                            Variables 
 //-----------------------------------------------------------------------------
 
 int full;
+//volatile uint8_t count = 0;
+volatile char temperature = 0;
+volatile uint8_t pot = 0;
+char adc0[10];
+char adc1[10];
+char cont[10];
+float count = 0;
+float conv0 = 0;
+float conv1 = 0;
+char converted, converted02;
+char valor, hundreds, residuo, tens, units;
 
 //-----------------------------------------------------------------------------
 //                            Prototipos 
 //-----------------------------------------------------------------------------
 
 void setup(void);
-
-
+void ADC_convert(char *data,float a, int place); // converter
+char division (char valor);
 //-----------------------------------------------------------------------------
 //                            Interrupciones
 //-----------------------------------------------------------------------------
@@ -72,11 +92,13 @@ void __interrupt() isr(void)
 void main(void) {
     
     setup();    // Llamo a mi configuracion
-
+    Lcd_Init();
+    Lcd_Clear(); //limpio lo que tenga la LCD siempre llamandolo de la lib
     
     while(1)    // Equivale al loop
     {
-
+        
+        
         //Obtener informacion del primer slave
         I2C_Master_Start();
         I2C_Master_Write(0x51); //51, el 1 para que lea
@@ -96,8 +118,56 @@ void main(void) {
         PORTD = I2C_Master_Read(0); //read temperature
         I2C_Master_Stop();
         __delay_ms(200);
+        
+        I2C_Master_Start();
+        I2C_Master_Write(0x91); //51, el 1 para que lea
+        PORTA = I2C_Master_Read(0); // Contador
+        I2C_Master_Stop();
+        __delay_ms(200);
+        
+        count = PORTA;
+        pot = PORTB;
+        temperature = PORTD;
 
+ 
+    Lcd_Clear();
+    Lcd_Set_Cursor(1,2);
+    Lcd_Write_String("S1");
+    Lcd_Set_Cursor(1,8);
+    Lcd_Write_String("S2");
+    Lcd_Set_Cursor(1,14);
+    Lcd_Write_String("S3");
+    __delay_ms(1000);
+    Lcd_Set_Cursor(2,1);
+    Lcd_Write_String(adc0);
+    Lcd_Set_Cursor(2,4);
+    Lcd_Write_String("V");
+    Lcd_Set_Cursor(2,7);
+    Lcd_Write_String(adc1);
+    Lcd_Set_Cursor(2,11);
+    Lcd_Write_String("'");
+    Lcd_Set_Cursor(2,14);
+    Lcd_Write_String(cont);
+    __delay_ms(2000);
+    
+//    converted =  ((175.72 * temperature)/65536) - 46.85;
+    converted = temperature - 77 ;
+  
+    conv0 = 0;
+
+      
+    conv0 = (pot / (float) 255)*5; //Se pasa a voltaje
+                                         
+    ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
+
+
+    ADC_convert(adc1, converted, 2);
+    
+    converted02 = division(count);    
+    ADC_convert(cont, converted02, 2); 
+    
     }
+    return;
 }
 
 //-----------------------------------------------------------------------------
@@ -108,9 +178,19 @@ void setup(void){
     
     ANSEL = 0;
     ANSELH = 0;
+    
+    TRISAbits.TRISA0 = 0;
+    TRISAbits.TRISA1 = 0;
+    TRISAbits.TRISA2 = 0;
+    TRISAbits.TRISA3 = 0;
+    
     TRISB = 0;
-    PORTB = 0;
     TRISD = 0;
+    TRISC = 0;
+    TRISEbits.TRISE0 = 0;
+    TRISEbits.TRISE1 = 0;
+    
+
     
     //limpiar puertos
     PORTA = 0x00;
@@ -120,17 +200,80 @@ void setup(void){
     PORTE = 0x00;
     
 //    //Configurar reloj interno
-    OSCCONbits.IRCF0 = 0;        //reloj interno de 8mhz
+    OSCCONbits.IRCF0 = 0;        //reloj interno de 4mhz
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.SCS = 1;  //internal oscillator is used for system clock
-    
-//    //configuracion de interrupciones
-//    PIE1bits.ADIE = 1;      //enable de la int del ADC
-//    PIR1bits.ADIF = 0;      //limpiar la interrupcion del ADC
-//    INTCONbits.GIE = 1;     //habilita las interrupciones globales
-//    INTCONbits.PEIE = 1;    //periferical interrupts
+
  
     // I2C configuracion Maestro
     I2C_Master_Init(100000);        // Inicializar Comuncaci�n I2C
 }
+
+/*******************************************************************************
+ * Funciones para conversión del ADC 
+ ******************************************************************************/
+void ADC_convert(char *data,float a, int place) 
+{
+     int temp=a;
+     float x=0.0;
+     int digits=0;
+     int i=0,mu=1;
+     int j=0;
+     if(a<0)
+     {
+            a=a*-1;
+            data[i]='-';
+            i++;
+      }
+     //exponent component
+     while(temp!=0)
+     {
+         temp=temp/10;
+         digits++;          
+     }
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else  for(j=2;j<=digits;j++)mu=mu*10;
+         
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }
+     //mantissa component
+     data[i]='.';
+     i++;
+     digits=0;
+     for(j=1;j<=place;j++)mu=mu*10;
+     x=(a-(int)a)*mu; //shift places
+     a=x;
+     temp=a;
+     x=0.0;
+     mu=1;
+     digits=place;
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else  for(j=2;j<=digits;j++)mu=mu*10;
+         
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }   
+     
+    data[i]='\n';
+}
+
+char division (char valor){
+    hundreds = valor/100;//esto me divide entre 100 y se queda con el entero
+    residuo = valor%100; //el residuo de lo que estoy operando
+    tens = residuo/10; 
+    units = residuo%10; //se queda con las units de las tens
+} 

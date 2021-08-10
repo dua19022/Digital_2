@@ -16,5 +16,6 @@
 
 //defino el prototipo de la funcion
 void ADC_config(char frec); //tomara el valor que deseamos de la frecuencia
+void ADC_convert(char *data,float a, int place); // converter
 
 #endif	/* XC_HEADER_TEMPLATE_H */

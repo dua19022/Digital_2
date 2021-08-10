@@ -2,9 +2,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
 [p mainexit ]
-"58 Lab04.c
-[; ;Lab04.c: 58: void setup(void);
+"78 Lab04.c
+[; ;Lab04.c: 78: void setup(void);
 [v _setup `(v ~T0 @X0 0 ef ]
+"55 ./LCD_4.h
+[; ;./LCD_4.h: 55: void Lcd_Init(void);
+[v _Lcd_Init `(v ~T0 @X0 0 ef ]
+"51
+[; ;./LCD_4.h: 51: void Lcd_Clear(void);
+[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
 "41 ./I2C.h
 [; ;./I2C.h: 41: void I2C_Master_Start(void);
 [v _I2C_Master_Start `(v ~T0 @X0 0 ef ]
@@ -27,21 +33,58 @@ Version 4.0 HI-TECH Software Intermediate Code
 "352 D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
 [v _PORTD `Vuc ~T0 @X0 0 e@8 ]
-"3387
+"166
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"53 ./LCD_4.h
+[; ;./LCD_4.h: 53: void Lcd_Set_Cursor(char a, char b);
+[v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
+"59
+[; ;./LCD_4.h: 59: void Lcd_Write_String(char *a);
+[v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
+"79 Lab04.c
+[; ;Lab04.c: 79: void ADC_convert(char *data,float a, int place);
+[v _ADC_convert `(v ~T0 @X0 0 ef3`*uc`f`i ]
+"80
+[; ;Lab04.c: 80: char division (char valor);
+[v _division `(uc ~T0 @X0 0 ef1`uc ]
+"3387 D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3449: extern volatile unsigned char ANSELH __attribute__((address(0x189)));
 [v _ANSELH `Vuc ~T0 @X0 0 e@393 ]
+"1422
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1422:     struct {
+[s S53 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S53 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 TRISA7 ]
+"1421
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1421: typedef union {
+[u S52 `S53 1 ]
+[n S52 . . ]
+"1433
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1433: extern volatile TRISAbits_t TRISAbits __attribute__((address(0x085)));
+[v _TRISAbits `VS52 ~T0 @X0 0 e@133 ]
 "1478
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "1602
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"166
-[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
-[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"1540
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1540: extern volatile unsigned char TRISC __attribute__((address(0x087)));
+[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"1670
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1670:     struct {
+[s S61 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S61 . TRISE0 TRISE1 TRISE2 TRISE3 ]
+"1669
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1669: typedef union {
+[u S60 `S61 1 ]
+[n S60 . . ]
+"1677
+[; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1677: extern volatile TRISEbits_t TRISEbits __attribute__((address(0x089)));
+[v _TRISEbits `VS60 ~T0 @X0 0 e@137 ]
 "290
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 290: extern volatile unsigned char PORTC __attribute__((address(0x007)));
 [v _PORTC `Vuc ~T0 @X0 0 e@7 ]
@@ -300,169 +343,603 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;D:/Program File/MPLabX/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"29 Lab04.c
+"31 Lab04.c
 [p x FOSC  =  INTRC_NOCLKOUT ]
-"30
-[p x WDTE  =  OFF        ]
-"31
-[p x PWRTE  =  OFF       ]
 "32
-[p x MCLRE  =  OFF       ]
+[p x WDTE  =  OFF        ]
 "33
-[p x CP  =  OFF          ]
+[p x PWRTE  =  OFF       ]
 "34
-[p x CPD  =  OFF         ]
+[p x MCLRE  =  OFF       ]
 "35
-[p x BOREN  =  OFF       ]
+[p x CP  =  OFF          ]
 "36
-[p x IESO  =  OFF        ]
+[p x CPD  =  OFF         ]
 "37
-[p x FCMEN  =  OFF       ]
+[p x BOREN  =  OFF       ]
 "38
+[p x IESO  =  OFF        ]
+"39
+[p x FCMEN  =  OFF       ]
+"40
 [p x LVP  =  OFF         ]
-"41
+"43
 [p x BOR4V  =  BOR40V    ]
-"42
+"44
 [p x WRT  =  OFF         ]
-"52
-[; ;Lab04.c: 52: int full;
+"61
+[; ;Lab04.c: 61: int full;
 [v _full `i ~T0 @X0 1 e ]
-[v $root$_isr `(v ~T0 @X0 0 e ]
+"63
+[; ;Lab04.c: 63: volatile char temperature = 0;
+[v _temperature `Vuc ~T0 @X0 1 e ]
+[i _temperature
+-> -> 0 `i `uc
+]
 "64
-[; ;Lab04.c: 64: void __attribute__((picinterrupt(("")))) isr(void)
-[v _isr `(v ~T1 @X0 1 ef ]
+[; ;Lab04.c: 64: volatile uint8_t pot = 0;
+[v _pot `Vuc ~T0 @X0 1 e ]
+[i _pot
+-> -> 0 `i `uc
+]
 "65
-[; ;Lab04.c: 65: {
+[; ;Lab04.c: 65: char adc0[10];
+[v _adc0 `uc ~T0 @X0 -> 10 `i e ]
+"66
+[; ;Lab04.c: 66: char adc1[10];
+[v _adc1 `uc ~T0 @X0 -> 10 `i e ]
+"67
+[; ;Lab04.c: 67: char cont[10];
+[v _cont `uc ~T0 @X0 -> 10 `i e ]
+"68
+[; ;Lab04.c: 68: float count = 0;
+[v _count `f ~T0 @X0 1 e ]
+[i _count
+-> -> 0 `i `f
+]
+"69
+[; ;Lab04.c: 69: float conv0 = 0;
+[v _conv0 `f ~T0 @X0 1 e ]
+[i _conv0
+-> -> 0 `i `f
+]
+"70
+[; ;Lab04.c: 70: float conv1 = 0;
+[v _conv1 `f ~T0 @X0 1 e ]
+[i _conv1
+-> -> 0 `i `f
+]
+"71
+[; ;Lab04.c: 71: char converted, converted02;
+[v _converted `uc ~T0 @X0 1 e ]
+[v _converted02 `uc ~T0 @X0 1 e ]
+"72
+[; ;Lab04.c: 72: char valor, hundreds, residuo, tens, units;
+[v _valor `uc ~T0 @X0 1 e ]
+[v _hundreds `uc ~T0 @X0 1 e ]
+[v _residuo `uc ~T0 @X0 1 e ]
+[v _tens `uc ~T0 @X0 1 e ]
+[v _units `uc ~T0 @X0 1 e ]
+[v $root$_isr `(v ~T0 @X0 0 e ]
+"84
+[; ;Lab04.c: 84: void __attribute__((picinterrupt(("")))) isr(void)
+[v _isr `(v ~T1 @X0 1 ef ]
+"85
+[; ;Lab04.c: 85: {
 {
 [e :U _isr ]
 [f ]
-"67
-[; ;Lab04.c: 67: }
+"87
+[; ;Lab04.c: 87: }
 [e :UE 143 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"72
-[; ;Lab04.c: 72: void main(void) {
+"92
+[; ;Lab04.c: 92: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"74
-[; ;Lab04.c: 74:     setup();
-[e ( _setup ..  ]
-"77
-[; ;Lab04.c: 77:     while(1)
-[e :U 146 ]
-"78
-[; ;Lab04.c: 78:     {
-{
-"81
-[; ;Lab04.c: 81:         I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"82
-[; ;Lab04.c: 82:         I2C_Master_Write(0x51);
-[e ( _I2C_Master_Write (1 -> -> 81 `i `ui ]
-"83
-[; ;Lab04.c: 83:         PORTB = I2C_Master_Read(0);
-[e = _PORTB -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"84
-[; ;Lab04.c: 84:         I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"85
-[; ;Lab04.c: 85:         _delay((unsigned long)((200)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"88
-[; ;Lab04.c: 88:         I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"89
-[; ;Lab04.c: 89:         I2C_Master_Write(0x80);
-[e ( _I2C_Master_Write (1 -> -> 128 `i `ui ]
-"90
-[; ;Lab04.c: 90:         I2C_Master_Write(0xF3);
-[e ( _I2C_Master_Write (1 -> -> 243 `i `ui ]
-"91
-[; ;Lab04.c: 91:         I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"92
-[; ;Lab04.c: 92:         _delay((unsigned long)((200)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "94
-[; ;Lab04.c: 94:         I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
+[; ;Lab04.c: 94:     setup();
+[e ( _setup ..  ]
 "95
-[; ;Lab04.c: 95:         I2C_Master_Write(0x81);
-[e ( _I2C_Master_Write (1 -> -> 129 `i `ui ]
+[; ;Lab04.c: 95:     Lcd_Init();
+[e ( _Lcd_Init ..  ]
 "96
-[; ;Lab04.c: 96:         PORTD = I2C_Master_Read(0);
-[e = _PORTD -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"97
-[; ;Lab04.c: 97:         I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
+[; ;Lab04.c: 96:     Lcd_Clear();
+[e ( _Lcd_Clear ..  ]
 "98
-[; ;Lab04.c: 98:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[; ;Lab04.c: 98:     while(1)
+[e :U 146 ]
+"99
+[; ;Lab04.c: 99:     {
+{
+"103
+[; ;Lab04.c: 103:         I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"104
+[; ;Lab04.c: 104:         I2C_Master_Write(0x51);
+[e ( _I2C_Master_Write (1 -> -> 81 `i `ui ]
+"105
+[; ;Lab04.c: 105:         PORTB = I2C_Master_Read(0);
+[e = _PORTB -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"106
+[; ;Lab04.c: 106:         I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"107
+[; ;Lab04.c: 107:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"100
-[; ;Lab04.c: 100:     }
+"110
+[; ;Lab04.c: 110:         I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"111
+[; ;Lab04.c: 111:         I2C_Master_Write(0x80);
+[e ( _I2C_Master_Write (1 -> -> 128 `i `ui ]
+"112
+[; ;Lab04.c: 112:         I2C_Master_Write(0xF3);
+[e ( _I2C_Master_Write (1 -> -> 243 `i `ui ]
+"113
+[; ;Lab04.c: 113:         I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"114
+[; ;Lab04.c: 114:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"116
+[; ;Lab04.c: 116:         I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"117
+[; ;Lab04.c: 117:         I2C_Master_Write(0x81);
+[e ( _I2C_Master_Write (1 -> -> 129 `i `ui ]
+"118
+[; ;Lab04.c: 118:         PORTD = I2C_Master_Read(0);
+[e = _PORTD -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"119
+[; ;Lab04.c: 119:         I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"120
+[; ;Lab04.c: 120:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"122
+[; ;Lab04.c: 122:         I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"123
+[; ;Lab04.c: 123:         I2C_Master_Write(0x91);
+[e ( _I2C_Master_Write (1 -> -> 145 `i `ui ]
+"124
+[; ;Lab04.c: 124:         PORTA = I2C_Master_Read(0);
+[e = _PORTA -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"125
+[; ;Lab04.c: 125:         I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"126
+[; ;Lab04.c: 126:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"128
+[; ;Lab04.c: 128:         count = PORTA;
+[e = _count -> _PORTA `f ]
+"129
+[; ;Lab04.c: 129:         pot = PORTB;
+[e = _pot _PORTB ]
+"130
+[; ;Lab04.c: 130:         temperature = PORTD;
+[e = _temperature -> _PORTD `uc ]
+"133
+[; ;Lab04.c: 133:     Lcd_Clear();
+[e ( _Lcd_Clear ..  ]
+"134
+[; ;Lab04.c: 134:     Lcd_Set_Cursor(1,2);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 2 `i `uc ]
+"135
+[; ;Lab04.c: 135:     Lcd_Write_String("S1");
+[e ( _Lcd_Write_String (1 :s 1C ]
+"136
+[; ;Lab04.c: 136:     Lcd_Set_Cursor(1,8);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 8 `i `uc ]
+"137
+[; ;Lab04.c: 137:     Lcd_Write_String("S2");
+[e ( _Lcd_Write_String (1 :s 2C ]
+"138
+[; ;Lab04.c: 138:     Lcd_Set_Cursor(1,14);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 14 `i `uc ]
+"139
+[; ;Lab04.c: 139:     Lcd_Write_String("S3");
+[e ( _Lcd_Write_String (1 :s 3C ]
+"140
+[; ;Lab04.c: 140:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"141
+[; ;Lab04.c: 141:     Lcd_Set_Cursor(2,1);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"142
+[; ;Lab04.c: 142:     Lcd_Write_String(adc0);
+[e ( _Lcd_Write_String (1 &U _adc0 ]
+"143
+[; ;Lab04.c: 143:     Lcd_Set_Cursor(2,4);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 4 `i `uc ]
+"144
+[; ;Lab04.c: 144:     Lcd_Write_String("V");
+[e ( _Lcd_Write_String (1 :s 4C ]
+"145
+[; ;Lab04.c: 145:     Lcd_Set_Cursor(2,7);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"146
+[; ;Lab04.c: 146:     Lcd_Write_String(adc1);
+[e ( _Lcd_Write_String (1 &U _adc1 ]
+"147
+[; ;Lab04.c: 147:     Lcd_Set_Cursor(2,11);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 11 `i `uc ]
+"148
+[; ;Lab04.c: 148:     Lcd_Write_String("'");
+[e ( _Lcd_Write_String (1 :s 5C ]
+"149
+[; ;Lab04.c: 149:     Lcd_Set_Cursor(2,14);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 14 `i `uc ]
+"150
+[; ;Lab04.c: 150:     Lcd_Write_String(cont);
+[e ( _Lcd_Write_String (1 &U _cont ]
+"151
+[; ;Lab04.c: 151:     _delay((unsigned long)((2000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"154
+[; ;Lab04.c: 154:     converted = temperature - 77 ;
+[e = _converted -> - -> _temperature `i -> 77 `i `uc ]
+"156
+[; ;Lab04.c: 156:     conv0 = 0;
+[e = _conv0 -> -> 0 `i `f ]
+"159
+[; ;Lab04.c: 159:     conv0 = (pot / (float) 255)*5;
+[e = _conv0 * / -> -> _pot `i `f -> -> 255 `i `f -> -> 5 `i `f ]
+"161
+[; ;Lab04.c: 161:     ADC_convert(adc0, conv0, 2);
+[e ( _ADC_convert (3 , , &U _adc0 _conv0 -> 2 `i ]
+"164
+[; ;Lab04.c: 164:     ADC_convert(adc1, converted, 2);
+[e ( _ADC_convert (3 , , &U _adc1 -> _converted `f -> 2 `i ]
+"166
+[; ;Lab04.c: 166:     converted02 = division(count);
+[e = _converted02 ( _division (1 -> _count `uc ]
+"167
+[; ;Lab04.c: 167:     ADC_convert(cont, converted02, 2);
+[e ( _ADC_convert (3 , , &U _cont -> _converted02 `f -> 2 `i ]
+"169
+[; ;Lab04.c: 169:     }
 }
 [e :U 145 ]
 [e $U 146  ]
 [e :U 147 ]
-"101
-[; ;Lab04.c: 101: }
+"170
+[; ;Lab04.c: 170:     return;
+[e $UE 144  ]
+"171
+[; ;Lab04.c: 171: }
 [e :UE 144 ]
 }
-"107
-[; ;Lab04.c: 107: void setup(void){
+"177
+[; ;Lab04.c: 177: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"109
-[; ;Lab04.c: 109:     ANSEL = 0;
+"179
+[; ;Lab04.c: 179:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"110
-[; ;Lab04.c: 110:     ANSELH = 0;
+"180
+[; ;Lab04.c: 180:     ANSELH = 0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"111
-[; ;Lab04.c: 111:     TRISB = 0;
+"182
+[; ;Lab04.c: 182:     TRISAbits.TRISA0 = 0;
+[e = . . _TRISAbits 0 0 -> -> 0 `i `uc ]
+"183
+[; ;Lab04.c: 183:     TRISAbits.TRISA1 = 0;
+[e = . . _TRISAbits 0 1 -> -> 0 `i `uc ]
+"184
+[; ;Lab04.c: 184:     TRISAbits.TRISA2 = 0;
+[e = . . _TRISAbits 0 2 -> -> 0 `i `uc ]
+"185
+[; ;Lab04.c: 185:     TRISAbits.TRISA3 = 0;
+[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
+"187
+[; ;Lab04.c: 187:     TRISB = 0;
 [e = _TRISB -> -> 0 `i `uc ]
-"112
-[; ;Lab04.c: 112:     PORTB = 0;
-[e = _PORTB -> -> 0 `i `uc ]
-"113
-[; ;Lab04.c: 113:     TRISD = 0;
+"188
+[; ;Lab04.c: 188:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"116
-[; ;Lab04.c: 116:     PORTA = 0x00;
+"189
+[; ;Lab04.c: 189:     TRISC = 0;
+[e = _TRISC -> -> 0 `i `uc ]
+"190
+[; ;Lab04.c: 190:     TRISEbits.TRISE0 = 0;
+[e = . . _TRISEbits 0 0 -> -> 0 `i `uc ]
+"191
+[; ;Lab04.c: 191:     TRISEbits.TRISE1 = 0;
+[e = . . _TRISEbits 0 1 -> -> 0 `i `uc ]
+"196
+[; ;Lab04.c: 196:     PORTA = 0x00;
 [e = _PORTA -> -> 0 `i `uc ]
-"117
-[; ;Lab04.c: 117:     PORTB = 0x00;
+"197
+[; ;Lab04.c: 197:     PORTB = 0x00;
 [e = _PORTB -> -> 0 `i `uc ]
-"118
-[; ;Lab04.c: 118:     PORTC = 0x00;
+"198
+[; ;Lab04.c: 198:     PORTC = 0x00;
 [e = _PORTC -> -> 0 `i `uc ]
-"119
-[; ;Lab04.c: 119:     PORTD = 0x00;
+"199
+[; ;Lab04.c: 199:     PORTD = 0x00;
 [e = _PORTD -> -> 0 `i `uc ]
-"120
-[; ;Lab04.c: 120:     PORTE = 0x00;
+"200
+[; ;Lab04.c: 200:     PORTE = 0x00;
 [e = _PORTE -> -> 0 `i `uc ]
-"123
-[; ;Lab04.c: 123:     OSCCONbits.IRCF0 = 0;
+"203
+[; ;Lab04.c: 203:     OSCCONbits.IRCF0 = 0;
 [e = . . _OSCCONbits 1 1 -> -> 0 `i `uc ]
-"124
-[; ;Lab04.c: 124:     OSCCONbits.IRCF1 = 1;
+"204
+[; ;Lab04.c: 204:     OSCCONbits.IRCF1 = 1;
 [e = . . _OSCCONbits 1 2 -> -> 1 `i `uc ]
-"125
-[; ;Lab04.c: 125:     OSCCONbits.IRCF2 = 1;
+"205
+[; ;Lab04.c: 205:     OSCCONbits.IRCF2 = 1;
 [e = . . _OSCCONbits 1 3 -> -> 1 `i `uc ]
-"126
-[; ;Lab04.c: 126:     OSCCONbits.SCS = 1;
+"206
+[; ;Lab04.c: 206:     OSCCONbits.SCS = 1;
 [e = . . _OSCCONbits 0 0 -> -> 1 `i `uc ]
-"135
-[; ;Lab04.c: 135:     I2C_Master_Init(100000);
+"210
+[; ;Lab04.c: 210:     I2C_Master_Init(100000);
 [e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
-"136
-[; ;Lab04.c: 136: }
+"211
+[; ;Lab04.c: 211: }
 [e :UE 148 ]
 }
+"216
+[; ;Lab04.c: 216: void ADC_convert(char *data,float a, int place)
+[v _ADC_convert `(v ~T0 @X0 1 ef3`*uc`f`i ]
+"217
+[; ;Lab04.c: 217: {
+{
+[e :U _ADC_convert ]
+"216
+[; ;Lab04.c: 216: void ADC_convert(char *data,float a, int place)
+[v _data `*uc ~T0 @X0 1 r1 ]
+[v _a `f ~T0 @X0 1 r2 ]
+[v _place `i ~T0 @X0 1 r3 ]
+"217
+[; ;Lab04.c: 217: {
+[f ]
+"218
+[; ;Lab04.c: 218:      int temp=a;
+[v _temp `i ~T0 @X0 1 a ]
+[e = _temp -> _a `i ]
+"219
+[; ;Lab04.c: 219:      float x=0.0;
+[v _x `f ~T0 @X0 1 a ]
+[e = _x -> .0.0 `f ]
+"220
+[; ;Lab04.c: 220:      int digits=0;
+[v _digits `i ~T0 @X0 1 a ]
+[e = _digits -> 0 `i ]
+"221
+[; ;Lab04.c: 221:      int i=0,mu=1;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[v _mu `i ~T0 @X0 1 a ]
+[e = _mu -> 1 `i ]
+"222
+[; ;Lab04.c: 222:      int j=0;
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+"223
+[; ;Lab04.c: 223:      if(a<0)
+[e $ ! < _a -> -> 0 `i `f 150  ]
+"224
+[; ;Lab04.c: 224:      {
+{
+"225
+[; ;Lab04.c: 225:             a=a*-1;
+[e = _a * _a -> -U -> 1 `i `f ]
+"226
+[; ;Lab04.c: 226:             data[i]='-';
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x -> -> 45 `ui `uc ]
+"227
+[; ;Lab04.c: 227:             i++;
+[e ++ _i -> 1 `i ]
+"228
+[; ;Lab04.c: 228:       }
+}
+[e :U 150 ]
+"230
+[; ;Lab04.c: 230:      while(temp!=0)
+[e $U 151  ]
+[e :U 152 ]
+"231
+[; ;Lab04.c: 231:      {
+{
+"232
+[; ;Lab04.c: 232:          temp=temp/10;
+[e = _temp / _temp -> 10 `i ]
+"233
+[; ;Lab04.c: 233:          digits++;
+[e ++ _digits -> 1 `i ]
+"234
+[; ;Lab04.c: 234:      }
+}
+[e :U 151 ]
+"230
+[; ;Lab04.c: 230:      while(temp!=0)
+[e $ != _temp -> 0 `i 152  ]
+[e :U 153 ]
+"235
+[; ;Lab04.c: 235:      while(digits!=0)
+[e $U 154  ]
+[e :U 155 ]
+"236
+[; ;Lab04.c: 236:      {
+{
+"237
+[; ;Lab04.c: 237:          if(digits==1)mu=1;
+[e $ ! == _digits -> 1 `i 157  ]
+[e = _mu -> 1 `i ]
+[e $U 158  ]
+"238
+[; ;Lab04.c: 238:          else for(j=2;j<=digits;j++)mu=mu*10;
+[e :U 157 ]
+{
+[e = _j -> 2 `i ]
+[e $U 162  ]
+[e :U 159 ]
+[e = _mu * _mu -> 10 `i ]
+[e ++ _j -> 1 `i ]
+[e :U 162 ]
+[e $ <= _j _digits 159  ]
+[e :U 160 ]
+}
+[e :U 158 ]
+"240
+[; ;Lab04.c: 240:          x=a/mu;
+[e = _x / _a -> _mu `f ]
+"241
+[; ;Lab04.c: 241:          a=a-((int)x*mu);
+[e = _a - _a -> * -> _x `i _mu `f ]
+"242
+[; ;Lab04.c: 242:          data[i]=0x30+((int)x);
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x -> + -> 48 `i -> _x `i `uc ]
+"243
+[; ;Lab04.c: 243:          i++;
+[e ++ _i -> 1 `i ]
+"244
+[; ;Lab04.c: 244:          digits--;
+[e -- _digits -> 1 `i ]
+"245
+[; ;Lab04.c: 245:          mu=1;
+[e = _mu -> 1 `i ]
+"246
+[; ;Lab04.c: 246:      }
+}
+[e :U 154 ]
+"235
+[; ;Lab04.c: 235:      while(digits!=0)
+[e $ != _digits -> 0 `i 155  ]
+[e :U 156 ]
+"248
+[; ;Lab04.c: 248:      data[i]='.';
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x -> -> 46 `ui `uc ]
+"249
+[; ;Lab04.c: 249:      i++;
+[e ++ _i -> 1 `i ]
+"250
+[; ;Lab04.c: 250:      digits=0;
+[e = _digits -> 0 `i ]
+"251
+[; ;Lab04.c: 251:      for(j=1;j<=place;j++)mu=mu*10;
+{
+[e = _j -> 1 `i ]
+[e $U 166  ]
+[e :U 163 ]
+[e = _mu * _mu -> 10 `i ]
+[e ++ _j -> 1 `i ]
+[e :U 166 ]
+[e $ <= _j _place 163  ]
+[e :U 164 ]
+}
+"252
+[; ;Lab04.c: 252:      x=(a-(int)a)*mu;
+[e = _x * - _a -> -> _a `i `f -> _mu `f ]
+"253
+[; ;Lab04.c: 253:      a=x;
+[e = _a _x ]
+"254
+[; ;Lab04.c: 254:      temp=a;
+[e = _temp -> _a `i ]
+"255
+[; ;Lab04.c: 255:      x=0.0;
+[e = _x -> .0.0 `f ]
+"256
+[; ;Lab04.c: 256:      mu=1;
+[e = _mu -> 1 `i ]
+"257
+[; ;Lab04.c: 257:      digits=place;
+[e = _digits _place ]
+"258
+[; ;Lab04.c: 258:      while(digits!=0)
+[e $U 167  ]
+[e :U 168 ]
+"259
+[; ;Lab04.c: 259:      {
+{
+"260
+[; ;Lab04.c: 260:          if(digits==1)mu=1;
+[e $ ! == _digits -> 1 `i 170  ]
+[e = _mu -> 1 `i ]
+[e $U 171  ]
+"261
+[; ;Lab04.c: 261:          else for(j=2;j<=digits;j++)mu=mu*10;
+[e :U 170 ]
+{
+[e = _j -> 2 `i ]
+[e $U 175  ]
+[e :U 172 ]
+[e = _mu * _mu -> 10 `i ]
+[e ++ _j -> 1 `i ]
+[e :U 175 ]
+[e $ <= _j _digits 172  ]
+[e :U 173 ]
+}
+[e :U 171 ]
+"263
+[; ;Lab04.c: 263:          x=a/mu;
+[e = _x / _a -> _mu `f ]
+"264
+[; ;Lab04.c: 264:          a=a-((int)x*mu);
+[e = _a - _a -> * -> _x `i _mu `f ]
+"265
+[; ;Lab04.c: 265:          data[i]=0x30+((int)x);
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x -> + -> 48 `i -> _x `i `uc ]
+"266
+[; ;Lab04.c: 266:          i++;
+[e ++ _i -> 1 `i ]
+"267
+[; ;Lab04.c: 267:          digits--;
+[e -- _digits -> 1 `i ]
+"268
+[; ;Lab04.c: 268:          mu=1;
+[e = _mu -> 1 `i ]
+"269
+[; ;Lab04.c: 269:      }
+}
+[e :U 167 ]
+"258
+[; ;Lab04.c: 258:      while(digits!=0)
+[e $ != _digits -> 0 `i 168  ]
+[e :U 169 ]
+"271
+[; ;Lab04.c: 271:     data[i]='\n';
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x -> -> 10 `ui `uc ]
+"272
+[; ;Lab04.c: 272: }
+[e :UE 149 ]
+}
+"274
+[; ;Lab04.c: 274: char division (char valor){
+[v _division `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _division ]
+[v _valor `uc ~T0 @X0 1 r1 ]
+[f ]
+"275
+[; ;Lab04.c: 275:     hundreds = valor/100;
+[e = _hundreds -> / -> _valor `i -> 100 `i `uc ]
+"276
+[; ;Lab04.c: 276:     residuo = valor%100;
+[e = _residuo -> % -> _valor `i -> 100 `i `uc ]
+"277
+[; ;Lab04.c: 277:     tens = residuo/10;
+[e = _tens -> / -> _residuo `i -> 10 `i `uc ]
+"278
+[; ;Lab04.c: 278:     units = residuo%10;
+[e = _units -> % -> _residuo `i -> 10 `i `uc ]
+"279
+[; ;Lab04.c: 279: }
+[e :UE 176 ]
+}
+[a 4C 86 0 ]
+[a 3C 83 51 0 ]
+[a 2C 83 50 0 ]
+[a 1C 83 49 0 ]
+[a 5C 39 0 ]

@@ -2887,6 +2887,28 @@ unsigned short I2C_Master_Read(unsigned short a);
 void I2C_Slave_Init(uint8_t address);
 # 22 "Lab04.c" 2
 
+# 1 "./LCD_4.h" 1
+# 47 "./LCD_4.h"
+void Lcd_Port(char a);
+
+void Lcd_Cmd(char a);
+
+void Lcd_Clear(void);
+
+void Lcd_Set_Cursor(char a, char b);
+
+void Lcd_Init(void);
+
+void Lcd_Write_Char(char a);
+
+void Lcd_Write_String(char *a);
+
+void Lcd_Shift_Right(void);
+
+void Lcd_Shift_Left(void);
+# 23 "Lab04.c" 2
+
+
 
 
 
@@ -2907,16 +2929,27 @@ void I2C_Slave_Init(uint8_t address);
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 52 "Lab04.c"
+# 61 "Lab04.c"
 int full;
+
+volatile char temperature = 0;
+volatile uint8_t pot = 0;
+char adc0[10];
+char adc1[10];
+char cont[10];
+float count = 0;
+float conv0 = 0;
+float conv1 = 0;
+char converted, converted02;
+char valor, hundreds, residuo, tens, units;
 
 
 
 
 
 void setup(void);
-
-
+void ADC_convert(char *data,float a, int place);
+char division (char valor);
 
 
 
@@ -2931,10 +2964,12 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void) {
 
     setup();
-
+    Lcd_Init();
+    Lcd_Clear();
 
     while(1)
     {
+
 
 
         I2C_Master_Start();
@@ -2956,7 +2991,55 @@ void main(void) {
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(4000000/4000.0)));
 
+        I2C_Master_Start();
+        I2C_Master_Write(0x91);
+        PORTA = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+
+        count = PORTA;
+        pot = PORTB;
+        temperature = PORTD;
+
+
+    Lcd_Clear();
+    Lcd_Set_Cursor(1,2);
+    Lcd_Write_String("S1");
+    Lcd_Set_Cursor(1,8);
+    Lcd_Write_String("S2");
+    Lcd_Set_Cursor(1,14);
+    Lcd_Write_String("S3");
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+    Lcd_Set_Cursor(2,1);
+    Lcd_Write_String(adc0);
+    Lcd_Set_Cursor(2,4);
+    Lcd_Write_String("V");
+    Lcd_Set_Cursor(2,7);
+    Lcd_Write_String(adc1);
+    Lcd_Set_Cursor(2,11);
+    Lcd_Write_String("'");
+    Lcd_Set_Cursor(2,14);
+    Lcd_Write_String(cont);
+    _delay((unsigned long)((2000)*(4000000/4000.0)));
+
+
+    converted = temperature - 77 ;
+
+    conv0 = 0;
+
+
+    conv0 = (pot / (float) 255)*5;
+
+    ADC_convert(adc0, conv0, 2);
+
+
+    ADC_convert(adc1, converted, 2);
+
+    converted02 = division(count);
+    ADC_convert(cont, converted02, 2);
+
     }
+    return;
 }
 
 
@@ -2967,9 +3050,19 @@ void setup(void){
 
     ANSEL = 0;
     ANSELH = 0;
+
+    TRISAbits.TRISA0 = 0;
+    TRISAbits.TRISA1 = 0;
+    TRISAbits.TRISA2 = 0;
+    TRISAbits.TRISA3 = 0;
+
     TRISB = 0;
-    PORTB = 0;
     TRISD = 0;
+    TRISC = 0;
+    TRISEbits.TRISE0 = 0;
+    TRISEbits.TRISE1 = 0;
+
+
 
 
     PORTA = 0x00;
@@ -2983,6 +3076,76 @@ void setup(void){
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.SCS = 1;
-# 135 "Lab04.c"
+
+
+
     I2C_Master_Init(100000);
+}
+
+
+
+
+void ADC_convert(char *data,float a, int place)
+{
+     int temp=a;
+     float x=0.0;
+     int digits=0;
+     int i=0,mu=1;
+     int j=0;
+     if(a<0)
+     {
+            a=a*-1;
+            data[i]='-';
+            i++;
+      }
+
+     while(temp!=0)
+     {
+         temp=temp/10;
+         digits++;
+     }
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else for(j=2;j<=digits;j++)mu=mu*10;
+
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }
+
+     data[i]='.';
+     i++;
+     digits=0;
+     for(j=1;j<=place;j++)mu=mu*10;
+     x=(a-(int)a)*mu;
+     a=x;
+     temp=a;
+     x=0.0;
+     mu=1;
+     digits=place;
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else for(j=2;j<=digits;j++)mu=mu*10;
+
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }
+
+    data[i]='\n';
+}
+
+char division (char valor){
+    hundreds = valor/100;
+    residuo = valor%100;
+    tens = residuo/10;
+    units = residuo%10;
 }
