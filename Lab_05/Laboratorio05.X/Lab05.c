@@ -1,5 +1,5 @@
 /******************************************************************************
- * Laboratorio 3
+ * Laboratorio 5
  ******************************************************************************
  * File:   Lab01.c
  * Author: Marco
@@ -17,9 +17,6 @@
 #include <stdio.h>  // Para usar printf
 #include <string.h> // Concatenar
 #include <stdlib.h>
-
-// Librerias propias
-#include "SPI.h"
 
 
 //-----------------------------------------------------------------------------
@@ -49,12 +46,10 @@
 //                            Variables 
 //-----------------------------------------------------------------------------
 
-char pot1, pot2;
-int contador;
-char hundreds, tens, units, residuo;
+int count;
+char valor, hundreds, residuo, tens, units;
 char cen, dec, uni;
-char var;
-char con;
+char var, con;
 int full;
 
 //-----------------------------------------------------------------------------
@@ -62,17 +57,28 @@ int full;
 //-----------------------------------------------------------------------------
 
 void setup(void);
-void ReadSlave(void);
+void Text(void);
 char division (char valor);
-void mensaje(void);
-
 
 //-----------------------------------------------------------------------------
 //                            Interrupciones
 //-----------------------------------------------------------------------------
 void __interrupt() isr(void)
 {
-     
+     // Interrupcion del Puerto B
+    
+    if (RBIF == 1)  // Verificar bandera de la interrupcion del puerto b
+    {
+        if (PORTBbits.RB0 == 0) // Si oprimo el boton 1
+        {
+            PORTD = PORTD + 1;  // Se suma 1 al puerto
+        }
+        if  (PORTBbits.RB1 == 0)    // Se oprimo el boton 2
+        {
+            PORTD = PORTD - 1;  // Se le resta 1 al puerto
+        }
+        INTCONbits.RBIF = 0;    // Se limpia la bandera de la interrupcion
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -85,26 +91,10 @@ void main(void) {
     
     while(1)    // Equivale al loop
     {
-        
-        
-    PORTCbits.RC2 = 0;       //Slave Select
-       __delay_ms(1);
-       
-       spiWrite(0x0A);
-       pot1 = spiRead();
-       __delay_ms(1);
-       spiWrite(0x0A);
-       pot2 = spiRead();
-       __delay_ms(1);
-       
-       
-       __delay_ms(1);
-       PORTCbits.RC2 = 1;       //Slave Deselect 
-       mensaje();
-       
-       PORTB = full;
-        
+//        count = PORTD;
+//        Text();
     }
+    return;
 }
 
 //-----------------------------------------------------------------------------
@@ -115,15 +105,44 @@ void setup(void){
     
     ANSEL = 0;
     ANSELH = 0;
-    TRISC2 = 0;
-    TRISB = 0;
-    PORTB = 0;
-    PORTC = 0;
-    PORTD = 0;
-    PORTCbits.RC2 = 1;
-    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE,
-            SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
+    // Puerto A
+    
+    
+    // Puerto B
+    TRISAbits.TRISA0 = 0;
+    TRISAbits.TRISA1 = 0;
+    
+    // Puerto C
+    TRISC = 0;
+    
+    // Puerto D
+    TRISD = 0;
+        
+    // Puerto E
+
+    
+
+    
+    //limpiar puertos
+    PORTA = 0x00;
+    PORTB = 0x00;
+    PORTC = 0x00;
+    PORTD = 0x00;
+    PORTE = 0x00;
+    
+    //Configurar reloj interno
+    OSCCONbits.IRCF0 = 0;        //reloj interno de 4mhz
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.SCS = 1;  //internal oscillator is used for system clock
+    
+    // Configuracion de pull-up interno
+    OPTION_REGbits.nRBPU = 0;
+    WPUB = 0b00000011;
+    IOCBbits.IOCB0 = 1;
+    IOCBbits.IOCB1 = 1;
+
     // Configuraciones TX y RX
     TXSTAbits.SYNC = 0;
     TXSTAbits.BRGH = 1;
@@ -141,31 +160,13 @@ void setup(void){
     
     PIR1bits.RCIF = 0;  // Bandera rx
     PIR1bits.TXIF = 0;  // bandera tx
-    
-    //Configurar reloj interno
-    OSCCONbits.IRCF0 = 0;        //reloj interno de 4mhz
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.SCS = 1;  //internal oscillator is used for system clock
+
 }
 
-char division (char valor){
-    hundreds = valor/50;//esto me divide entre 100 y se queda con el entero
-    residuo = valor%100; //el residuo de lo que estoy operando
-    tens = residuo/10; 
-    units = residuo%10; //se queda con las units de las tens
-    // Se les suma 47 para que me den al valor requerido
-    hundreds = hundreds + 48;
-    tens = tens + 48;
-    units = units + 48;
-} 
-
-void mensaje (void){
-    division(pot1);
-    __delay_ms(250); //Tiempos para el despliegue de los caracteres
-    printf("\r Valor del POT1:\r");
-    __delay_ms(250);
-    printf("  ");
+void Text(void){
+     __delay_ms(250); //Tiempos para el despliegue de los caracteres
+     division(count);
+    printf("Valor del contador:\r");
     __delay_ms(250);
     TXREG = hundreds;
     __delay_ms(250);
@@ -175,30 +176,10 @@ void mensaje (void){
     __delay_ms(250);
     TXREG = units;
     __delay_ms(250);
-    printf(" V");
-    __delay_ms(250);
     printf("\r");
     
-    // Se despliega el valor del pot 2
-    division(pot2);
-    __delay_ms(250); 
-    printf("\r Valor del POT2: \r");
-    __delay_ms(250);
-    printf("  ");
-    __delay_ms(250);
-    TXREG = hundreds;
-    __delay_ms(250);
-    TXREG = 46;
-    __delay_ms(250);
-    TXREG = tens;
-    __delay_ms(250);
-    TXREG = units;
-    __delay_ms(250);
-    printf(" V");
-    __delay_ms(250);
-    printf("\r");
     
-    printf("Ingresar Centena: Rango(0-2)\r");
+     printf("Ingresar Centena: Rango(0-2)\r");
       defensa1:  
        while(RCIF == 0);
         cen = RCREG -48;  
@@ -232,13 +213,19 @@ void mensaje (void){
       full = concat(con, uni);
       __delay_ms(250);
     printf("El numero elegido es: %d", full);
+    count = full;
 }
 
-    void putch(char data){      // Funcion especifica de libreria stdio.h
-        while(TXIF == 0);
-        TXREG = data; // lo que se muestra de la cadena
-        return;
-    }   
+char division (char valor){
+    hundreds = valor/100;//esto me divide entre 100 y se queda con el entero
+    residuo = valor%100; //el residuo de lo que estoy operando
+    tens = residuo/10; 
+    units = residuo%10; //se queda con las units de las tens
+    // Se les suma 47 para que me den al valor requerido
+    hundreds = hundreds + 48;
+    tens = tens + 48;
+    units = units + 48;
+} 
 
 int concat(int a, int b)
 {
@@ -262,3 +249,9 @@ int concat(int a, int b)
     // return the formed integer
     return c;
 }
+
+void putch(char data){      // Funcion especifica de libreria stdio.h
+    while(TXIF == 0);
+    TXREG = data; // lo que se muestra de la cadena
+    return;
+}   
