@@ -46,7 +46,7 @@
 //                            Variables 
 //-----------------------------------------------------------------------------
 
-int count;
+int count, select;
 char valor, hundreds, residuo, tens, units;
 char cen, dec, uni;
 char var, con;
@@ -71,11 +71,11 @@ void __interrupt() isr(void)
     {
         if (PORTBbits.RB0 == 0) // Si oprimo el boton 1
         {
-            PORTD = PORTD + 1;  // Se suma 1 al puerto
+            count = count + 1;  // Se suma 1 al puerto
         }
         if  (PORTBbits.RB1 == 0)    // Se oprimo el boton 2
         {
-            PORTD = PORTD - 1;  // Se le resta 1 al puerto
+            count = count - 1;  // Se le resta 1 al puerto
         }
         INTCONbits.RBIF = 0;    // Se limpia la bandera de la interrupcion
     }
@@ -91,8 +91,9 @@ void main(void) {
     
     while(1)    // Equivale al loop
     {
-//        count = PORTD;
-//        Text();
+        PORTD = count;
+        PORTA = select;
+        Text();
     }
     return;
 }
@@ -107,14 +108,14 @@ void setup(void){
     ANSELH = 0;
     
     // Puerto A
-    
+    TRISA = 0;
     
     // Puerto B
-    TRISAbits.TRISA0 = 0;
-    TRISAbits.TRISA1 = 0;
+    TRISBbits.TRISB0 = 1;
+    TRISBbits.TRISB1 = 1;
     
     // Puerto C
-    TRISC = 0;
+
     
     // Puerto D
     TRISD = 0;
@@ -160,6 +161,14 @@ void setup(void){
     
     PIR1bits.RCIF = 0;  // Bandera rx
     PIR1bits.TXIF = 0;  // bandera tx
+    
+    //configuracion de interrupciones
+    INTCONbits.GIE = 1;     //habilita las interrupciones globales
+    INTCONbits.PEIE = 1;    //periferical interrupts
+    PIE1bits.RCIE = 0;      // Interrupcion rx
+    PIE1bits.TXIE = 0;      // Interrupcion TX
+    INTCONbits.RBIF = 1;    // Para que el boton funcione a la primera
+    INTCONbits.RBIE = 1;    // Interrupcion Puerto B
 
 }
 
@@ -169,8 +178,6 @@ void Text(void){
     printf("Valor del contador:\r");
     __delay_ms(250);
     TXREG = hundreds;
-    __delay_ms(250);
-    TXREG = 46;
     __delay_ms(250);
     TXREG = tens;
     __delay_ms(250);
@@ -212,8 +219,8 @@ void Text(void){
       con = concat(cen, dec);
       full = concat(con, uni);
       __delay_ms(250);
-    printf("El numero elegido es: %d", full);
-    count = full;
+    printf("El numero elegido es: %d \r", full);
+    select = full;
 }
 
 char division (char valor){

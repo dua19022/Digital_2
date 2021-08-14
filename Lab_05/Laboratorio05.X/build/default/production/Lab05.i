@@ -2863,7 +2863,7 @@ extern char * ftoa(float f, int * status);
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
 # 49 "Lab05.c"
-int count;
+int count, select;
 char valor, hundreds, residuo, tens, units;
 char cen, dec, uni;
 char var, con;
@@ -2888,11 +2888,11 @@ void __attribute__((picinterrupt(("")))) isr(void)
     {
         if (PORTBbits.RB0 == 0)
         {
-            PORTD = PORTD + 1;
+            count = count + 1;
         }
         if (PORTBbits.RB1 == 0)
         {
-            PORTD = PORTD - 1;
+            count = count - 1;
         }
         INTCONbits.RBIF = 0;
     }
@@ -2908,8 +2908,9 @@ void main(void) {
 
     while(1)
     {
-
-
+        PORTD = count;
+        PORTA = select;
+        Text();
     }
     return;
 }
@@ -2924,14 +2925,14 @@ void setup(void){
     ANSELH = 0;
 
 
+    TRISA = 0;
+
+
+    TRISBbits.TRISB0 = 1;
+    TRISBbits.TRISB1 = 1;
 
 
 
-    TRISAbits.TRISA0 = 0;
-    TRISAbits.TRISA1 = 0;
-
-
-    TRISC = 0;
 
 
     TRISD = 0;
@@ -2978,6 +2979,14 @@ void setup(void){
     PIR1bits.RCIF = 0;
     PIR1bits.TXIF = 0;
 
+
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 0;
+    PIE1bits.TXIE = 0;
+    INTCONbits.RBIF = 1;
+    INTCONbits.RBIE = 1;
+
 }
 
 void Text(void){
@@ -2986,8 +2995,6 @@ void Text(void){
     printf("Valor del contador:\r");
     _delay((unsigned long)((250)*(4000000/4000.0)));
     TXREG = hundreds;
-    _delay((unsigned long)((250)*(4000000/4000.0)));
-    TXREG = 46;
     _delay((unsigned long)((250)*(4000000/4000.0)));
     TXREG = tens;
     _delay((unsigned long)((250)*(4000000/4000.0)));
@@ -3029,8 +3036,8 @@ void Text(void){
       con = concat(cen, dec);
       full = concat(con, uni);
       _delay((unsigned long)((250)*(4000000/4000.0)));
-    printf("El numero elegido es: %d", full);
-    count = full;
+    printf("El numero elegido es: %d \r", full);
+    select = full;
 }
 
 char division (char valor){
