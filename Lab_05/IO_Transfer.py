@@ -11,24 +11,31 @@
 
 from Adafruit_IO import Client, RequestError, Feed
 
-ADAFRUIT_IO_KEY = "aio_PURz64S6H5eGl9BxCcYHtL2GVi6K"
+ADAFRUIT_IO_KEY = "aio_cnuy73YStrrxj7rQtSkeuB2TQ3am"
 ADAFRUIT_IO_USERNAME = "marcoaduartec"
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 
+#sensor1 = [15, 25, 13, 10, 11]
+#sensor2 = [1, 3, 4, 6, 8, 12]
+
+#for i in range(0, len(sensor1)):
+    #send1 = sensor1[i]
 #Sensor 01 Feed
 digital_feed = aio.feeds('sensor01') # Se selecciona el feed al que se le manda datos 
-aio.send_data(digital_feed.key, 35)  # Se manda el dato deseado en el segundo lugar
+aio.send_data(digital_feed.key, 10)  # Se manda el dato deseado en el segundo lugar
 digital_data = aio.receive(digital_feed.key)    # esta parte es para recibir datos
 print(f'digital signal: {digital_data.value}')
 
+#for a in range(0, len(sensor2)):
+ #   send2 = sensor2[a]
 #Sensor 02 Feed
 analog_feed = aio.feeds('sensor02')
-aio.send_data(analog_feed.key, 5)
+aio.send_data(analog_feed.key, 12)
 analog_data = aio.receive(analog_feed.key)
 print(f'analog signal: {analog_data.value}')
 
 # Read data Feed
 send_feed = aio.feeds('send')
-aio.send_data(send_feed.key, 155)
+#aio.send_data(send_feed.key, 25)
 send_data = aio.receive(send_feed.key)
 print(f'send signal: {send_data.value}')
