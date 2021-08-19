@@ -51,6 +51,8 @@ char valor, hundreds, residuo, tens, units;
 char cen, dec, uni;
 char var, con;
 int full;
+char prt[3];
+int conv;
 
 //-----------------------------------------------------------------------------
 //                            Prototipos 
@@ -91,9 +93,18 @@ void main(void) {
     
     while(1)    // Equivale al loop
     {
-        PORTD = count;
-        PORTA = select;
+        PORTA = count;
         Text();
+        
+        while(RCIF == 0);
+        cen = RCREG -48;
+        while(RCIF == 0);
+        dec = RCREG -48;
+        while(RCIF == 0);
+        uni = RCREG -48;
+        
+        PORTD = ((cen*100)+(dec*10)+ uni);
+        
     }
     return;
 }
@@ -175,52 +186,23 @@ void setup(void){
 void Text(void){
      __delay_ms(250); //Tiempos para el despliegue de los caracteres
      division(count);
-    printf("Valor del contador:\r");
-    __delay_ms(250);
-    TXREG = hundreds;
-    __delay_ms(250);
-    TXREG = tens;
-    __delay_ms(250);
-    TXREG = units;
-    __delay_ms(250);
-    printf("\r");
-    
-    
-     printf("Ingresar Centena: Rango(0-2)\r");
-      defensa1:  
-       while(RCIF == 0);
-        cen = RCREG -48;  
-
-       while(RCREG > '2'){ 
-           goto defensa1;
+        
+     if (RCREG == 'a'){              
+     __delay_ms(50);
+    if(TXIF == 1){
+        TXREG = hundreds; 
+    }
+    __delay_ms(50);
+    if(TXIF == 1){
+        TXREG = tens; 
        }
-    
-    printf("Ingresar Decenas: \r");
-      defensa2:
-        while(RCIF == 0); 
-         dec = RCREG -48; 
-
-        if(cen == 2){
-           while(RCREG > '5'){
-               goto defensa2;
-           }
+    __delay_ms(50);
+    if(TXIF == 1){
+        TXREG = units; 
        }
-
-    printf("Ingresar Unidades: \r");
-      defensa3:
-       while(RCIF == 0); 
-        uni = RCREG - 48;
-
-       if(cen == 2 && dec == 5){
-           while(RCREG > '5'){
-               goto defensa3;
-           }
-       }
-      con = concat(cen, dec);
-      full = concat(con, uni);
-      __delay_ms(250);
-    printf("El numero elegido es: %d \r", full);
-    select = full;
+    __delay_ms(50);
+        
+     }
 }
 
 char division (char valor){
