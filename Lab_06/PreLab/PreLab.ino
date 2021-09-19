@@ -18,6 +18,7 @@ int lector1 = 0;
 int lector2 = 0;
 int counter = 0;
 int push;
+int outPins[8] = {LED1, LED2, LED3, LED4, LED5, LED6, LED7, LED8};
 
 void setup() {
   // put your setup code here, to run once:
@@ -39,72 +40,24 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly: 
   lector1 = digitalRead(PUSH1);
-  lector2 = digitalRead(PUSH2);
 
-  // Antirrebote
-  if (lector1 == HIGH){
-    push = 1;
-  }
+  int i = 0;
+  int j = 0;
+  if (digitalRead(PUSH1) == LOW) {
+    for (i = 0; i < 255; i++) {
+      for (j = 0; j < 8; j++) {
 
-  if (lector1 == LOW && push == 1){
-    digitalWrite(BLUE, HIGH);
-    counter = counter + 1;
-    push = 0;
-  }
-  else{
-    digitalWrite(BLUE, LOW);
-  }
+        if ( ((i >> j) & 1 )  == 1)  {
+          digitalWrite(outPins[j], HIGH);
 
-  if (lector2 == HIGH){
-    digitalWrite(GREEN, LOW);
-  }
-  else{
-    digitalWrite(GREEN, HIGH);
-  }
+        }
+        else {
+          digitalWrite(outPins[j], LOW);
+        }
 
-  if (counter == 1){
-    digitalWrite(LED1, HIGH);
-    //delay(250);
-  }
-  if(counter == 2){
-    digitalWrite(LED2, HIGH);
-    digitalWrite(LED1, LOW);
-    delay(100);
-  }
-  if(counter == 3){
-    digitalWrite(LED3, HIGH);
-    digitalWrite(LED2, LOW);
-    delay(100);
-  }
-  if(counter == 4){
-    digitalWrite(LED4, HIGH);
-    digitalWrite(LED3, LOW);
-    delay(100);
-  }
-  if(counter == 5){
-    digitalWrite(LED5, HIGH);
-    digitalWrite(LED4, LOW);
-    delay(100);
-  }
-  if(counter == 6){
-    digitalWrite(LED6, HIGH);
-    digitalWrite(LED5, LOW);
-    delay(100);
-  }
-  if(counter == 7){
-    digitalWrite(LED7, HIGH);
-    digitalWrite(LED6, LOW);
-    delay(100);
-  }
-  if(counter == 8){
-    digitalWrite(LED8, HIGH);
-    digitalWrite(LED7, LOW);
-    delay(100);
-  }
-  if(counter == 9){
-    counter = 0;
-    digitalWrite(LED8, LOW);
-    delay(100);
+      }
+      delay(250);
+    }
   }
 
 }
