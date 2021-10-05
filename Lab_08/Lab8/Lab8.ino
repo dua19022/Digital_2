@@ -103,15 +103,15 @@ void setup() {
  SPI.setModule(0); //Con esto se activa la comunicacion SPI
  pinMode(PA_3, OUTPUT);  // Se define como output
 
- //SD en LCD
- archivo = SD.open("mario_~1.txt");
- sprintf(buf, "Hello!%d", archivo.read());
- String text2 = archivo.read();
- while (archivo.available()) {
-      LCD_Print(text2, 110, 110, 2, 0xffff, 0x0000););
-    }
-    archivo.close();
- 
+ //SD en LCD 
+ //archivo = SD.open("mario_~1.txt");
+ //sprintf(buf, "Hello!%d", archivo.read());
+// String text2 = archivo.read();
+// while (archivo.available()) {
+//      LCD_Print(text2, 110, 110, 2, 0xffff, 0x0000););
+  //  }
+//    archivo.close();
+
  
 }
 //***************************************************************************************************************************************

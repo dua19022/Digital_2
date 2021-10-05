@@ -70,7 +70,7 @@ void readText(char dir) {
   File archivo;
   switch (dir) {//Se abre el archivo dependiendo del valor que tenga la variable option 
     case '1':
-      archivo = SD.open("rebell~1.txt");
+      archivo = SD.open("test.bmp");
       seleccion = 1; //habilita la rutina de mostrar el contenido
       break;
     case '2':
