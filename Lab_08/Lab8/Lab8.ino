@@ -4,7 +4,6 @@
 #include <TM4C123GH6PM.h>
 #include <SPI.h>
 #include <SD.h>
-#include <stdlib.h>
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
@@ -21,7 +20,6 @@
 #include "bitmaps.h"
 #include "font.h"
 
-
 // Defino los nombres de los pines
 #define PUSH1 PF_4
 #define PUSH2 PF_0
@@ -30,7 +28,8 @@
 #define LCD_RS PD_2
 #define LCD_WR PD_3
 #define LCD_RD PE_1
-int DPINS[] = {PB_0, PB_1, PB_2, PB_3, PB_4, PB_5, PB_6, PB_7};  
+int DPINS[] = {PB_0, PB_1, PB_2, PB_3, PB_4, PB_5, PB_6, PB_7}; 
+
 
 //***************************************************************************************************************************************
 // Prototipos
@@ -50,103 +49,157 @@ void LCD_Print(String text, int x, int y, int fontSize, int color, int backgroun
 void LCD_Bitmap(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned char bitmap[]);
 void LCD_Sprite(int x, int y, int width, int height, unsigned char bitmap[],int columns, int index, char flip, char offset);
 
-// SD
-void printDirectory(File dir, int numTabs);
-void readText(char dir);
 
 
+// Se declaran File class de la libreria SD
+Sd2Card card;
+SdVolume volume;
+SdFile root;
+int lecturaserial;
+const int chipSelect = PA_3; //cs PIN
+
+File pic;
 extern uint8_t fondo[];
 extern uint8_t uvg[];
+extern uint8_t walle[];
+extern uint8_t mario[];
 
-// Define variable
-File archivo;
-char option = '0';
-uint8_t control = 0;
-char inByte;
-int n=1;
-char buf[10];
+int counter1 = 0; //initialize counter in 0
+int counter2 = 0;
+int state1 = 0; //flag to increment counter
+int state2 = 0;
+int start = 0; //flag to start the traffic light sequence
+
+int ascii_hex(int a);
+void MapSD(char x[]);
 
 
 //***************************************************************************************************************************************
 // Initialization
 //***************************************************************************************************************************************
 void setup() {
-  SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
+  pinMode(PUSH1, INPUT_PULLUP);
+  pinMode(PUSH2, INPUT_PULLUP);
+  SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ);
   Serial.begin(9600);
   GPIOPadConfigSet(GPIO_PORTB_BASE, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
   Serial.println("Start");
   LCD_Init();
   LCD_Clear(0x00);
+  SPI.setModule(0);
+  Serial.print("\nInitializing SD card...");
+  pinMode(PA_3, OUTPUT);     // change this to 53 on a mega
 
-  //FillRect(unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int c)
-  FillRect(80, 60, 160, 120, 0x0400);
+  // we'll use the initialization code from the utility libraries
+  // since we're just testing if the card is working!
+  if (!card.init(SPI_HALF_SPEED, chipSelect)) {
+    Serial.println("initialization failed. Things to check:");
+    Serial.println("* is a card is inserted?");
+    Serial.println("* Is your wiring correct?");
+    Serial.println("* did you change the chipSelect pin to match your shield or module?");
+    return;
+  } else {
+    Serial.println("Wiring is correct and a card is present.");
+  }
 
-  //LCD_Print(String text, int x, int y, int fontSize, int color, int background)
-  String text1 = "IE3027";
-  LCD_Print(text1, 110, 110, 2, 0xffff, 0x0000);
-  
-  delay(1000);
-   
-  //LCD_Bitmap(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned char bitmap[]);
+  // see if the card is present and can be initialized:
+  if (!SD.begin(chipSelect)) {
+    Serial.println("Card failed, or not present");
+    // don't do anything more:
+    return;
+  }
+  Serial.println("card initialized.");
+
   LCD_Bitmap(0, 0, 320, 240, uvg);
-  /*
-  for(int x = 0; x <319; x++){
-    LCD_Bitmap(x, 52, 16, 16, tile2);
-    LCD_Bitmap(x, 68, 16, 16, tile);
-    LCD_Bitmap(x, 207, 16, 16, tile);
-    LCD_Bitmap(x, 223, 16, 16, tile);
-    x += 15;
- }
- */
+  //  // print the type of card
+  Serial.print("\nCard type: ");
+  switch (card.type()) {
+    case SD_CARD_TYPE_SD1:
+      Serial.println("SD1");
+      break;
+    case SD_CARD_TYPE_SD2:
+      Serial.println("SD2");
+      break;
+    case SD_CARD_TYPE_SDHC:
+      Serial.println("SDHC");
+      break;
+    default:
+      Serial.println("Unknown");
+  }
 
- // SD
- SPI.setModule(0); //Con esto se activa la comunicacion SPI
- pinMode(PA_3, OUTPUT);  // Se define como output
+  // Now we will try to open the 'volume'/'partition' - it should be FAT16 or FAT32
+  if (!volume.init(card)) {
+    Serial.println("Could not find FAT16/FAT32 partition.\nMake sure you've formatted the card");
+    return;
+  }
 
- //SD en LCD 
- //archivo = SD.open("mario_~1.txt");
- //sprintf(buf, "Hello!%d", archivo.read());
-// String text2 = archivo.read();
-// while (archivo.available()) {
-//      LCD_Print(text2, 110, 110, 2, 0xffff, 0x0000););
-  //  }
-//    archivo.close();
 
- 
+  // print the type and size of the first FAT-type volume
+  uint32_t volumesize;
+  Serial.print("\nVolume type is FAT");
+  Serial.println(volume.fatType(), DEC);
+  Serial.println();
+
+  volumesize = volume.blocksPerCluster();    // clusters are collections of blocks
+  volumesize *= volume.clusterCount();       // we'll have a lot of clusters
+  volumesize *= 4096;                            // SD card blocks are always 512 bytes
+  Serial.print("Volume size (bytes): ");
+  Serial.println(volumesize);
+  Serial.print("Volume size (Kbytes): ");
+  volumesize /= 1024;
+  Serial.println(volumesize);
+  Serial.print("Volume size (Mbytes): ");
+  volumesize /= 1024;
+  Serial.println(volumesize);
+
+
+  Serial.println("\nFiles found on the card (name, date and size in bytes): ");
+  root.openRoot(volume);
+
+  // list all files in the card with date and size
+  root.ls(LS_R | LS_DATE | LS_SIZE);
+
+
 }
 //***************************************************************************************************************************************
 // Loop
 //***************************************************************************************************************************************
 void loop() {
-  /*
-  for(int x = 0; x <320-32; x++){
-    delay(10);
-    
-    int mario_index = (x/11)%8;
 
-    //LCD_Sprite(int x, int y, int width, int height, unsigned char bitmap[],int columns, int index, char flip, char offset);
-    LCD_Sprite(x, 20, 16, 32, mario, 8, mario_index, 1, 0);
-    V_line( x -1, 20, 32, 0x0000);
-
-    int bowser_index = (x/11)%4;
-    
-    LCD_Sprite(x, 175, 32, 32, bowser, 4, bowser_index, 1, 0);
-    V_line( x -1, 175, 32, 0x421b);
+//debouncing for the two push buttons
+  if (digitalRead(PUSH1) == HIGH) {
+    state1 = 1;
   }
-  for(int x = 320-32; x >0; x--){
-    delay(10);
+   if (digitalRead(PUSH1) == LOW && state1 == 1) {
+    counter1++;
+    state1 = 0;
+  }
 
-    int mario_index = (x/11)%8;
+if (digitalRead(PUSH2) == HIGH) {
+    state2 = 1;
+  }
+   if (digitalRead(PUSH2) == LOW && state2 == 1) {
+    counter1++;
+    state2 = 0;
+  }
+  
+  if ((counter1 == 1 || counter2 == 1) && (start == 0)) {
+    start = 1;
+    counter1 = 2;
+    counter2 = 2;
+  }
+  
+  if (counter1 == 3){
+    MapSD("test1.txt"); 
+    delay(50);
+  }
+  if (counter2 == 3){
+    MapSD("test.txt");
+    delay(50);
+  }
     
-    LCD_Sprite(x, 20, 16, 32, mario, 8, mario_index, 0, 0);
-    V_line(x + 16, 20, 32, 0x0000);
+  
 
-    int bowser_index = (x/11)%4;
-    
-    LCD_Sprite(x, 175, 32, 32, bowser, 4, bowser_index, 0, 1);
-    V_line(x + 32, 175, 32, 0x421b);
-  } 
-  */
 }
 
 //***************************************************************************************************************************************
@@ -488,65 +541,77 @@ void LCD_Sprite(int x, int y, int width, int height, unsigned char bitmap[],int 
   digitalWrite(LCD_CS, HIGH);
 }
 
-// SD
-void readText(char dir) {
-  uint8_t seleccion;
-  File archivo;
-  switch (dir) {//Se abre el archivo dependiendo del valor que tenga la variable option 
-    case '1':
-      archivo = SD.open("rebell~1.txt");
-      seleccion = 1; //habilita la rutina de mostrar el contenido
-      break;
-    case '2':
-      archivo = SD.open("yoshi.txt");
-      seleccion = 1;
-      break;
-    case '3':
-      archivo = SD.open("vader.txt");
-      seleccion = 1;
-      break;
-    default:
-      seleccion = 0;//inhabilita la rutina de mostrar el contenido
-      break;
-  }
-  if (seleccion == 1) {//rutina que sirve para mostrar la informacion guardada en el archivo seleccionado
-    if (archivo) {
-      Serial.println(archivo.name());
+//***************************************************************************************************************************************
+// Función para almacenar el nombre de los archivos de la SD
+//***************************************************************************************************************************************
 
-      // read from the file until there's nothing else in it:
-      while (archivo.available()) {
-        Serial.write(archivo.read());
-      }
-      // close the file:
-      archivo.close();
-    } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening file...");
-    }
+  int ascii_hex(int a) {
+  switch (a) {
+    case 48:
+      return 0;
+    case 49:
+      return 1;
+    case 50:
+      return 2;
+    case 51:
+      return 3;
+    case 52:
+      return 4;
+    case 53:
+      return 5;
+    case 54:
+      return 6;
+    case 55:
+      return 7;
+    case 56:
+      return 8;
+    case 57:
+      return 9;
+    case 97:
+      return 10;
+    case 98:
+      return 11;
+    case 99:
+      return 12;
+    case 100:
+      return 13;
+    case 101:
+      return 14;
+    case 102:
+      return 15;
   }
 }
 
-void printDirectory(File dir, int numTabs) {//en esta rutina se muestra el contenido guardado en la SD
-  dir.rewindDirectory();
-  while (true) {
-
-    File entry =  dir.openNextFile();
-    if (! entry) {
-      // no more files
-      break;
+  void MapSD(char x[]){
+  pic = SD.open(x, FILE_READ);
+  int hex1 = 0;
+  int val1 = 0;
+  int val2 = 0;
+  int mapear = 0;
+  int vert = 0;
+  unsigned char maps[640];
+  if(pic){
+    Serial.println("Reading file...");
+    while (pic.available()){
+      mapear = 0;
+      while (mapear < 640){
+        hex1 = pic.read();
+        if (hex1 == 120){
+          val1 = pic.read();
+          val2 = pic.read();
+          val1 = ascii_hex(val1);
+          val2 = ascii_hex(val2);
+          maps[mapear]=val1*16+val2;
+          mapear++;
+        }
+      }
+      LCD_Bitmap(0, vert, 320, 1, maps);
+      vert++;
     }
-    for (uint8_t i = 0; i < numTabs; i++) {
-      Serial.print('\t');
-    }
-    Serial.print(entry.name());
-    if (entry.isDirectory()) {
-      Serial.println("/");
-      printDirectory(entry, numTabs + 1);
-    } else {
-      // files have sizes, directories do not
-      Serial.print("\t\t");
-      Serial.println(entry.size(), DEC);
-    }
-    entry.close();
+    pic.close();
+  }
+  else{
+    Serial.println("File couldn't be read...");
+    pic.close();
   }
 }
